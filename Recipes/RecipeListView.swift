@@ -40,7 +40,9 @@ struct RecipeListView: View {
                             }
                         }
                     }
-//                    .onDelete(perform: deleteItems)
+                    .onDelete { indexSet in
+                        self.deleteItem(atRow: indexSet.first!)
+                    }
                 }
                 .toolbar {
                     ToolbarItem(placement: .navigationBarTrailing) {
@@ -56,6 +58,19 @@ struct RecipeListView: View {
                 }
             }
             .navigationTitle("Recipes")
+        }
+    }
+
+    private func deleteItem(atRow row: Int) {
+        _ = withAnimation {
+            Task {
+                viewContext.delete(recipes[row])
+                do {
+                    try viewContext.save()
+                } catch {
+                    print("Failed to save delete")
+                }
+            }
         }
     }
 }
