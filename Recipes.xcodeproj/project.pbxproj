@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		EA2C9B9E29B686E20019DB36 /* RecipesApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA2C9B9D29B686E20019DB36 /* RecipesApp.swift */; };
-		EA2C9BA029B686E20019DB36 /* RecipesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA2C9B9F29B686E20019DB36 /* RecipesView.swift */; };
+		EA2C9BA029B686E20019DB36 /* RecipeListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA2C9B9F29B686E20019DB36 /* RecipeListView.swift */; };
 		EA2C9BA229B686E40019DB36 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EA2C9BA129B686E40019DB36 /* Assets.xcassets */; };
 		EA2C9BA729B686E40019DB36 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA2C9BA629B686E40019DB36 /* Persistence.swift */; };
 		EA2C9BAA29B686E40019DB36 /* Recipes.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = EA2C9BA829B686E40019DB36 /* Recipes.xcdatamodeld */; };
@@ -18,6 +18,7 @@
 		EA2C9BCF29B689F30019DB36 /* AddRecipeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA2C9BCE29B689F30019DB36 /* AddRecipeView.swift */; };
 		EA2C9BD129B68B680019DB36 /* AddRecipeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA2C9BD029B68B680019DB36 /* AddRecipeViewModel.swift */; };
 		EA2C9BD929B68F9D0019DB36 /* Recipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA2C9BD829B68F9C0019DB36 /* Recipe.swift */; };
+		EA2C9BDB29B6A30A0019DB36 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA2C9BDA29B6A30A0019DB36 /* ImagePicker.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,7 +41,7 @@
 /* Begin PBXFileReference section */
 		EA2C9B9A29B686E20019DB36 /* Recipes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Recipes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EA2C9B9D29B686E20019DB36 /* RecipesApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipesApp.swift; sourceTree = "<group>"; };
-		EA2C9B9F29B686E20019DB36 /* RecipesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipesView.swift; sourceTree = "<group>"; };
+		EA2C9B9F29B686E20019DB36 /* RecipeListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeListView.swift; sourceTree = "<group>"; };
 		EA2C9BA129B686E40019DB36 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EA2C9BA629B686E40019DB36 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		EA2C9BA929B686E40019DB36 /* Recipes.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Recipes.xcdatamodel; sourceTree = "<group>"; };
@@ -52,6 +53,7 @@
 		EA2C9BCE29B689F30019DB36 /* AddRecipeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRecipeView.swift; sourceTree = "<group>"; };
 		EA2C9BD029B68B680019DB36 /* AddRecipeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRecipeViewModel.swift; sourceTree = "<group>"; };
 		EA2C9BD829B68F9C0019DB36 /* Recipe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recipe.swift; sourceTree = "<group>"; };
+		EA2C9BDA29B6A30A0019DB36 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,9 +105,9 @@
 			isa = PBXGroup;
 			children = (
 				EA2C9BD729B68F920019DB36 /* Model */,
-				EA2C9BD229B68B6D0019DB36 /* AddRecipe */,
+				EA2C9BD229B68B6D0019DB36 /* RecipeView */,
 				EA2C9B9D29B686E20019DB36 /* RecipesApp.swift */,
-				EA2C9B9F29B686E20019DB36 /* RecipesView.swift */,
+				EA2C9B9F29B686E20019DB36 /* RecipeListView.swift */,
 				EA2C9BA129B686E40019DB36 /* Assets.xcassets */,
 				EA2C9BA629B686E40019DB36 /* Persistence.swift */,
 			);
@@ -129,13 +131,14 @@
 			path = RecipesUITests;
 			sourceTree = "<group>";
 		};
-		EA2C9BD229B68B6D0019DB36 /* AddRecipe */ = {
+		EA2C9BD229B68B6D0019DB36 /* RecipeView */ = {
 			isa = PBXGroup;
 			children = (
 				EA2C9BCE29B689F30019DB36 /* AddRecipeView.swift */,
+				EA2C9BDA29B6A30A0019DB36 /* ImagePicker.swift */,
 				EA2C9BD029B68B680019DB36 /* AddRecipeViewModel.swift */,
 			);
-			path = AddRecipe;
+			path = RecipeView;
 			sourceTree = "<group>";
 		};
 		EA2C9BD729B68F920019DB36 /* Model */ = {
@@ -277,10 +280,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				EA2C9BA729B686E40019DB36 /* Persistence.swift in Sources */,
-				EA2C9BA029B686E20019DB36 /* RecipesView.swift in Sources */,
+				EA2C9BA029B686E20019DB36 /* RecipeListView.swift in Sources */,
 				EA2C9BD929B68F9D0019DB36 /* Recipe.swift in Sources */,
 				EA2C9BD129B68B680019DB36 /* AddRecipeViewModel.swift in Sources */,
 				EA2C9B9E29B686E20019DB36 /* RecipesApp.swift in Sources */,
+				EA2C9BDB29B6A30A0019DB36 /* ImagePicker.swift in Sources */,
 				EA2C9BAA29B686E40019DB36 /* Recipes.xcdatamodeld in Sources */,
 				EA2C9BCF29B689F30019DB36 /* AddRecipeView.swift in Sources */,
 			);
@@ -443,6 +447,7 @@
 				DEVELOPMENT_TEAM = 3NT7YH4NA6;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSCameraUsageDescription = "Please enable camera access in order to take photos of recipes and food imagery.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -471,6 +476,7 @@
 				DEVELOPMENT_TEAM = 3NT7YH4NA6;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSCameraUsageDescription = "Please enable camera access in order to take photos of recipes and food imagery.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

@@ -1,5 +1,5 @@
 //
-//  RecipesView.swift
+//  RecipeListView.swift
 //  Recipes
 //
 //  Created by Tony Short on 06/03/2023.
@@ -8,8 +8,10 @@
 import CoreData
 import SwiftUI
 
-struct RecipesView: View {
+struct RecipeListView: View {
     @Environment(\.managedObjectContext) private var viewContext
+    @State private var showingAddRecipeView = false
+    @State private var chosenRecipe: Recipe?
 
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \Recipe.dateAdded, ascending: true)],
@@ -19,17 +21,23 @@ struct RecipesView: View {
     var body: some View {
         NavigationStack {
             VStack {
-                NavigationLink {
-                    AddRecipeView(viewModel: .init(viewContext: viewContext))
+                Button {
+                    showingAddRecipeView = true
                 } label: {
                     Text("Add a new recipe")
                 }
                 List {
                     ForEach(recipes) { recipe in
-                        NavigationLink {
-                            Text("Recipe at \(recipe.dateAdded!, formatter: itemFormatter)")
+                        Button {
+                            chosenRecipe = recipe
                         } label: {
-                            Text(recipe.name ?? "")
+                            HStack {
+                                Image(uiImage: UIImage(data: recipe.plateImage ?? Data()) ?? UIImage())
+                                    .frame(width: 40, height: 40)
+                                Image(uiImage: UIImage(data: recipe.stepsImage ?? Data()) ?? UIImage())
+                                    .frame(width: 40, height: 40)
+                                Text(recipe.name ?? "")
+                            }
                         }
                     }
 //                    .onDelete(perform: deleteItems)
@@ -38,6 +46,13 @@ struct RecipesView: View {
                     ToolbarItem(placement: .navigationBarTrailing) {
                         EditButton()
                     }
+                }
+                .sheet(isPresented: $showingAddRecipeView) {
+                    RecipeView(viewModel: .init(viewContext: viewContext))
+                }
+                .sheet(item: $chosenRecipe) {
+                    RecipeView(viewModel: .init(viewContext: viewContext),
+                               recipe: $0)
                 }
             }
             .navigationTitle("Recipes")

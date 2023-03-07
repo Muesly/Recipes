@@ -5,6 +5,7 @@
 //  Created by Tony Short on 06/03/2023.
 //
 
+import AVFoundation
 import CoreData
 import Foundation
 import SwiftUI
@@ -16,9 +17,10 @@ class AddRecipeViewModel {
         self.viewContext = viewContext
     }
 
-    func saveRecipe(name: String) {
-
-        let _ = Recipe(context: viewContext, name: name)
+    func saveRecipe(name: String,
+                    plateImage: UIImage,
+                    stepsImage: UIImage) {
+        let _ = Recipe(context: viewContext, name: name, plateImage: plateImage, stepsImage: stepsImage)
 
         do {
             try viewContext.save()
@@ -30,3 +32,16 @@ class AddRecipeViewModel {
         }
     }
 }
+
+class CameraManager : ObservableObject {
+    @Published var permissionGranted = false
+
+    func requestPermission() {
+        AVCaptureDevice.requestAccess(for: .video, completionHandler: {accessGranted in
+            DispatchQueue.main.async {
+                self.permissionGranted = accessGranted
+            }
+        })
+    }
+}
+
