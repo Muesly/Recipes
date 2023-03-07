@@ -11,14 +11,14 @@ struct RecipeView: View {
     @Environment(\.dismiss) var dismiss
     @State private var recipeName: String = ""
     @State private var showPlateImagePicker = false
-    @State private var recipePlateImage = UIImage()
+    @State private var recipePlateImage: UIImage?
     @State private var showStepsImagePicker = false
-    @State private var recipeStepsImage = UIImage()
+    @State private var recipeStepsImage: UIImage?
     @FocusState private var recipeNameIsFocused: Bool
-    private let viewModel: AddRecipeViewModel
+    private let viewModel: RecipeViewModel
     private var recipe: Recipe?
 
-    init(viewModel: AddRecipeViewModel,
+    init(viewModel: RecipeViewModel,
          recipe: Recipe? = nil) {
         self.viewModel = viewModel
         self.recipe = recipe
@@ -38,15 +38,17 @@ struct RecipeView: View {
                         Image(systemName: "camera")
                     }
                 }
-                NavigationLink {
-                    Image(uiImage: self.recipePlateImage)
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                } label: {
-                    Image(uiImage: self.recipePlateImage)
-                        .resizable()
-                        .frame(width: 120, height: 120)
-                        .aspectRatio(contentMode: .fill)
+                if let recipePlateImage {
+                    NavigationLink {
+                        Image(uiImage: recipePlateImage)
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                    } label: {
+                        Image(uiImage: recipePlateImage)
+                            .resizable()
+                            .frame(width: 120, height: 120)
+                            .aspectRatio(contentMode: .fill)
+                    }
                 }
                 Button {
                     showStepsImagePicker = true
@@ -56,10 +58,18 @@ struct RecipeView: View {
                         Image(systemName: "camera")
                     }
                 }
-                Image(uiImage: self.recipeStepsImage)
-                    .resizable()
-                    .frame(width: 120, height: 120)
-                    .aspectRatio(contentMode: .fill)
+                if let recipeStepsImage {
+                    NavigationLink {
+                        Image(uiImage: recipeStepsImage)
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                    } label: {
+                        Image(uiImage: recipeStepsImage)
+                            .resizable()
+                            .frame(width: 120, height: 120)
+                            .aspectRatio(contentMode: .fill)
+                    }
+                }
                 Spacer()
             }
             .padding()
@@ -72,9 +82,16 @@ struct RecipeView: View {
                 ToolbarItem(placement: .confirmationAction) {
                     Button("Save") {
                         recipeNameIsFocused = false
-                        viewModel.saveRecipe(name: recipeName,
-                                             plateImage: recipePlateImage,
-                                             stepsImage: recipeStepsImage)
+                        if let recipe = recipe {
+                            viewModel.editRecipe(recipe: recipe,
+                                                 name: recipeName,
+                                                 plateImage: recipePlateImage,
+                                                 stepsImage: recipeStepsImage)
+                        } else {
+                            viewModel.addRecipe(name: recipeName,
+                                                plateImage: recipePlateImage,
+                                                stepsImage: recipeStepsImage)
+                        }
                         dismiss()
                     }
                     .disabled(recipeName.isEmpty)
@@ -95,7 +112,7 @@ struct RecipeView: View {
             }
             if let stepsImageData = recipe.stepsImage,
                 let stepsImage = UIImage(data: stepsImageData) {
-                recipePlateImage = stepsImage
+                recipeStepsImage = stepsImage
             }
         }
         .sheet(isPresented: $showPlateImagePicker) {

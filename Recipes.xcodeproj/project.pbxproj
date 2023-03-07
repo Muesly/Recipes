@@ -15,8 +15,8 @@
 		EA2C9BB429B686E50019DB36 /* RecipesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA2C9BB329B686E50019DB36 /* RecipesTests.swift */; };
 		EA2C9BBE29B686E50019DB36 /* RecipesUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA2C9BBD29B686E50019DB36 /* RecipesUITests.swift */; };
 		EA2C9BC029B686E50019DB36 /* RecipesUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA2C9BBF29B686E50019DB36 /* RecipesUITestsLaunchTests.swift */; };
-		EA2C9BCF29B689F30019DB36 /* AddRecipeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA2C9BCE29B689F30019DB36 /* AddRecipeView.swift */; };
-		EA2C9BD129B68B680019DB36 /* AddRecipeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA2C9BD029B68B680019DB36 /* AddRecipeViewModel.swift */; };
+		EA2C9BCF29B689F30019DB36 /* RecipeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA2C9BCE29B689F30019DB36 /* RecipeView.swift */; };
+		EA2C9BD129B68B680019DB36 /* RecipeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA2C9BD029B68B680019DB36 /* RecipeViewModel.swift */; };
 		EA2C9BD929B68F9D0019DB36 /* Recipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA2C9BD829B68F9C0019DB36 /* Recipe.swift */; };
 		EA2C9BDB29B6A30A0019DB36 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA2C9BDA29B6A30A0019DB36 /* ImagePicker.swift */; };
 /* End PBXBuildFile section */
@@ -50,8 +50,8 @@
 		EA2C9BB929B686E50019DB36 /* RecipesUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RecipesUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		EA2C9BBD29B686E50019DB36 /* RecipesUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipesUITests.swift; sourceTree = "<group>"; };
 		EA2C9BBF29B686E50019DB36 /* RecipesUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipesUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		EA2C9BCE29B689F30019DB36 /* AddRecipeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRecipeView.swift; sourceTree = "<group>"; };
-		EA2C9BD029B68B680019DB36 /* AddRecipeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRecipeViewModel.swift; sourceTree = "<group>"; };
+		EA2C9BCE29B689F30019DB36 /* RecipeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeView.swift; sourceTree = "<group>"; };
+		EA2C9BD029B68B680019DB36 /* RecipeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeViewModel.swift; sourceTree = "<group>"; };
 		EA2C9BD829B68F9C0019DB36 /* Recipe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recipe.swift; sourceTree = "<group>"; };
 		EA2C9BDA29B6A30A0019DB36 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -134,9 +134,9 @@
 		EA2C9BD229B68B6D0019DB36 /* RecipeView */ = {
 			isa = PBXGroup;
 			children = (
-				EA2C9BCE29B689F30019DB36 /* AddRecipeView.swift */,
+				EA2C9BCE29B689F30019DB36 /* RecipeView.swift */,
 				EA2C9BDA29B6A30A0019DB36 /* ImagePicker.swift */,
-				EA2C9BD029B68B680019DB36 /* AddRecipeViewModel.swift */,
+				EA2C9BD029B68B680019DB36 /* RecipeViewModel.swift */,
 			);
 			path = RecipeView;
 			sourceTree = "<group>";
@@ -282,11 +282,11 @@
 				EA2C9BA729B686E40019DB36 /* Persistence.swift in Sources */,
 				EA2C9BA029B686E20019DB36 /* RecipeListView.swift in Sources */,
 				EA2C9BD929B68F9D0019DB36 /* Recipe.swift in Sources */,
-				EA2C9BD129B68B680019DB36 /* AddRecipeViewModel.swift in Sources */,
+				EA2C9BD129B68B680019DB36 /* RecipeViewModel.swift in Sources */,
 				EA2C9B9E29B686E20019DB36 /* RecipesApp.swift in Sources */,
 				EA2C9BDB29B6A30A0019DB36 /* ImagePicker.swift in Sources */,
 				EA2C9BAA29B686E40019DB36 /* Recipes.xcdatamodeld in Sources */,
-				EA2C9BCF29B689F30019DB36 /* AddRecipeView.swift in Sources */,
+				EA2C9BCF29B689F30019DB36 /* RecipeView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
