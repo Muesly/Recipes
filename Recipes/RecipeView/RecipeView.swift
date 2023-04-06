@@ -11,6 +11,7 @@ struct RecipeView: View {
     @Environment(\.dismiss) var dismiss
     @State private var recipeName: String = ""
     @State private var showPlateImagePicker = false
+    @State private var showCategoryPicker = false
     @State private var recipePlateImage: UIImage?
     @State private var showStepsImagePicker = false
     @State private var recipeStepsImage: UIImage?
@@ -26,58 +27,89 @@ struct RecipeView: View {
 
     var body: some View {
         NavigationView {
-            VStack(alignment: .center, spacing: 20) {
-                TextField("Enter recipe name", text: $recipeName)
-                    .focused($recipeNameIsFocused)
-                    .padding(.top, 20)
-                Button {
-                    showPlateImagePicker = true
-                } label: {
-                    HStack {
-                        Text("Take photo of plate")
-                        Image(systemName: "camera")
+            VStack(alignment: .leading, spacing: 20) {
+                HStack {
+                    Text("Recipe Name:")
+                    TextField("Enter recipe name", text: $recipeName)
+                        .padding(5)
+                        .background(Colours.backgroundTertiary)
+                        .cornerRadius(10)
+                        .focused($recipeNameIsFocused)
+                }
+                .padding(.top, 10)
+                .foregroundColor(Colours.foregroundPrimary)
+                HStack {
+                    Text("Photo of plate:")
+                    if let recipePlateImage {
+                        NavigationLink {
+                            Image(uiImage: recipePlateImage)
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                        } label: {
+                            Image(uiImage: recipePlateImage)
+                                .resizable()
+                                .frame(width: 120, height: 120)
+                                .aspectRatio(contentMode: .fill)
+                                .cornerRadius(10)
+                        }
+                    } else {
+                        Button {
+                            showPlateImagePicker = true
+                        } label: {
+                            Image(systemName: "camera")
+                        }
                     }
                 }
-                if let recipePlateImage {
-                    NavigationLink {
-                        Image(uiImage: recipePlateImage)
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
+                HStack {
+                    Text("Photo of steps:")
+                    if let recipeStepsImage {
+                        NavigationLink {
+                            Image(uiImage: recipeStepsImage)
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                        } label: {
+                            Image(uiImage: recipeStepsImage)
+                                .resizable()
+                                .frame(width: 120, height: 120)
+                                .aspectRatio(contentMode: .fill)
+                                .cornerRadius(10)
+                        }
+                    } else {
+                        Button {
+                            showStepsImagePicker = true
+                        } label: {
+                            Image(systemName: "camera")
+                        }
+                    }
+                }
+                HStack {
+                    Button {
+                        showCategoryPicker = true
                     } label: {
-                        Image(uiImage: recipePlateImage)
-                            .resizable()
-                            .frame(width: 120, height: 120)
-                            .aspectRatio(contentMode: .fill)
-                    }
-                }
-                Button {
-                    showStepsImagePicker = true
-                } label: {
-                    HStack {
-                        Text("Take photo of recipe steps")
-                        Image(systemName: "camera")
-                    }
-                }
-                if let recipeStepsImage {
-                    NavigationLink {
-                        Image(uiImage: recipeStepsImage)
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                    } label: {
-                        Image(uiImage: recipeStepsImage)
-                            .resizable()
-                            .frame(width: 120, height: 120)
-                            .aspectRatio(contentMode: .fill)
+                        HStack {
+                            Text("Categories:")
+                                .foregroundColor(Colours.foregroundPrimary)
+                            Button {
+                                showCategoryPicker = true
+                            } label: {
+                                Text("Pick...")
+                            }
+                        }
                     }
                 }
                 Spacer()
             }
             .padding()
+            .background(Colours.backgroundSecondary)
+            .cornerRadius(20)
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
                     Button("Cancel") {
                         dismiss()
                     }
+                }
+                ToolbarItem(placement: .principal) {
+                    Text("New Recipe").font(.headline)
                 }
                 ToolbarItem(placement: .confirmationAction) {
                     Button("Save") {
@@ -97,12 +129,14 @@ struct RecipeView: View {
                     .disabled(recipeName.isEmpty)
                 }
             }
+            .background(Colours.backgroundPrimary)
         }
+        .padding()
+        .background(Colours.backgroundPrimary)
         .onAppear {
-            recipeNameIsFocused = true
-
             guard let recipe = recipe,
                   let name = recipe.name else {
+                recipeNameIsFocused = true
                 return
             }
             recipeName = name
@@ -120,6 +154,9 @@ struct RecipeView: View {
         }
         .sheet(isPresented: $showStepsImagePicker) {
             ImagePicker(sourceType: .camera, selectedImage: self.$recipeStepsImage)
+        }
+        .sheet(isPresented: $showCategoryPicker) {
+            CategoryListView(newCategory: "", categories: [])
         }
     }
 }

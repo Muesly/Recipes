@@ -21,12 +21,15 @@ struct RecipeListView: View {
     var body: some View {
         NavigationStack {
             VStack {
-                Button {
-                    showingAddRecipeView = true
-                } label: {
-                    Text("Add a new recipe")
-                }
                 List {
+                    Button {
+                        showingAddRecipeView = true
+                    } label: {
+                        Text("Add a new recipe")
+                            .frame(maxWidth: .infinity, alignment: .center)
+                            .bold()
+                    }
+                    .listRowBackground(Colours.backgroundSecondary)
                     ForEach(recipes) { recipe in
                         Button {
                             chosenRecipe = recipe
@@ -39,16 +42,16 @@ struct RecipeListView: View {
                                 Text(recipe.name ?? "")
                             }
                         }
+                        .listRowBackground(Colours.backgroundSecondary)
                     }
                     .onDelete { indexSet in
                         self.deleteItem(atRow: indexSet.first!)
                     }
                 }
-                .toolbar {
-                    ToolbarItem(placement: .navigationBarTrailing) {
-                        EditButton()
-                    }
-                }
+                .padding(.top, 5)
+                .scrollContentBackground(.hidden)
+                .foregroundColor(Colours.foregroundPrimary)
+                .background(Colours.backgroundPrimary)
                 .sheet(isPresented: $showingAddRecipeView) {
                     RecipeView(viewModel: .init(viewContext: viewContext))
                 }

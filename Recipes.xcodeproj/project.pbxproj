@@ -19,6 +19,9 @@
 		EA2C9BD129B68B680019DB36 /* RecipeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA2C9BD029B68B680019DB36 /* RecipeViewModel.swift */; };
 		EA2C9BD929B68F9D0019DB36 /* Recipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA2C9BD829B68F9C0019DB36 /* Recipe.swift */; };
 		EA2C9BDB29B6A30A0019DB36 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA2C9BDA29B6A30A0019DB36 /* ImagePicker.swift */; };
+		EA2C9BDD29B7DBCD0019DB36 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA2C9BDC29B7DBCD0019DB36 /* Theme.swift */; };
+		EA2C9BE029B7DC050019DB36 /* Colours.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EA2C9BDF29B7DC050019DB36 /* Colours.xcassets */; };
+		EA2C9BE329B7DF750019DB36 /* CategoryListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA2C9BE229B7DF750019DB36 /* CategoryListView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,6 +57,9 @@
 		EA2C9BD029B68B680019DB36 /* RecipeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeViewModel.swift; sourceTree = "<group>"; };
 		EA2C9BD829B68F9C0019DB36 /* Recipe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recipe.swift; sourceTree = "<group>"; };
 		EA2C9BDA29B6A30A0019DB36 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
+		EA2C9BDC29B7DBCD0019DB36 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
+		EA2C9BDF29B7DC050019DB36 /* Colours.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colours.xcassets; sourceTree = "<group>"; };
+		EA2C9BE229B7DF750019DB36 /* CategoryListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryListView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,12 +110,13 @@
 		EA2C9B9C29B686E20019DB36 /* Recipes */ = {
 			isa = PBXGroup;
 			children = (
+				EA2C9BDE29B7DBF10019DB36 /* Resources */,
 				EA2C9BD729B68F920019DB36 /* Model */,
-				EA2C9BD229B68B6D0019DB36 /* RecipeView */,
 				EA2C9B9D29B686E20019DB36 /* RecipesApp.swift */,
 				EA2C9B9F29B686E20019DB36 /* RecipeListView.swift */,
-				EA2C9BA129B686E40019DB36 /* Assets.xcassets */,
-				EA2C9BA629B686E40019DB36 /* Persistence.swift */,
+				EA2C9BDC29B7DBCD0019DB36 /* Theme.swift */,
+				EA2C9BD229B68B6D0019DB36 /* RecipeView */,
+				EA2C9BE129B7DF5E0019DB36 /* CategoryList */,
 			);
 			path = Recipes;
 			sourceTree = "<group>";
@@ -144,10 +151,28 @@
 		EA2C9BD729B68F920019DB36 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				EA2C9BA629B686E40019DB36 /* Persistence.swift */,
 				EA2C9BA829B686E40019DB36 /* Recipes.xcdatamodeld */,
 				EA2C9BD829B68F9C0019DB36 /* Recipe.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		EA2C9BDE29B7DBF10019DB36 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				EA2C9BA129B686E40019DB36 /* Assets.xcassets */,
+				EA2C9BDF29B7DC050019DB36 /* Colours.xcassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		EA2C9BE129B7DF5E0019DB36 /* CategoryList */ = {
+			isa = PBXGroup;
+			children = (
+				EA2C9BE229B7DF750019DB36 /* CategoryListView.swift */,
+			);
+			path = CategoryList;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -255,6 +280,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EA2C9BA229B686E40019DB36 /* Assets.xcassets in Resources */,
+				EA2C9BE029B7DC050019DB36 /* Colours.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -279,9 +305,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EA2C9BDD29B7DBCD0019DB36 /* Theme.swift in Sources */,
 				EA2C9BA729B686E40019DB36 /* Persistence.swift in Sources */,
 				EA2C9BA029B686E20019DB36 /* RecipeListView.swift in Sources */,
 				EA2C9BD929B68F9D0019DB36 /* Recipe.swift in Sources */,
+				EA2C9BE329B7DF750019DB36 /* CategoryListView.swift in Sources */,
 				EA2C9BD129B68B680019DB36 /* RecipeViewModel.swift in Sources */,
 				EA2C9B9E29B686E20019DB36 /* RecipesApp.swift in Sources */,
 				EA2C9BDB29B6A30A0019DB36 /* ImagePicker.swift in Sources */,
