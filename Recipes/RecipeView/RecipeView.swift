@@ -10,14 +10,12 @@ import SwiftUI
 struct RecipeView: View {
     @Environment(\.dismiss) var dismiss
     @State private var recipeName: String = ""
-    @State private var showPlateImagePicker = false
     @State private var showCategoryPicker = false
-    @State private var recipePlateImage: UIImage?
-    @State private var showStepsImagePicker = false
-    @State private var recipeStepsImage: UIImage?
     @FocusState private var recipeNameIsFocused: Bool
     private let viewModel: RecipeViewModel
     private var recipe: Recipe?
+    @State private var recipePlateImage: UIImage?
+    @State private var recipeStepsImage: UIImage?
 
     init(viewModel: RecipeViewModel,
          recipe: Recipe? = nil) {
@@ -38,50 +36,8 @@ struct RecipeView: View {
                 }
                 .padding(.top, 10)
                 .foregroundColor(Colours.foregroundPrimary)
-                HStack {
-                    Text("Photo of plate:")
-                    if let recipePlateImage {
-                        NavigationLink {
-                            Image(uiImage: recipePlateImage)
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                        } label: {
-                            Image(uiImage: recipePlateImage)
-                                .resizable()
-                                .frame(width: 120, height: 120)
-                                .aspectRatio(contentMode: .fill)
-                                .cornerRadius(10)
-                        }
-                    } else {
-                        Button {
-                            showPlateImagePicker = true
-                        } label: {
-                            Image(systemName: "camera")
-                        }
-                    }
-                }
-                HStack {
-                    Text("Photo of steps:")
-                    if let recipeStepsImage {
-                        NavigationLink {
-                            Image(uiImage: recipeStepsImage)
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                        } label: {
-                            Image(uiImage: recipeStepsImage)
-                                .resizable()
-                                .frame(width: 120, height: 120)
-                                .aspectRatio(contentMode: .fill)
-                                .cornerRadius(10)
-                        }
-                    } else {
-                        Button {
-                            showStepsImagePicker = true
-                        } label: {
-                            Image(systemName: "camera")
-                        }
-                    }
-                }
+                ImagePickerView(title: "Photo of plate:", image: $recipePlateImage)
+                ImagePickerView(title: "Photo of steps:", image: $recipeStepsImage)
                 HStack {
                     Button {
                         showCategoryPicker = true
@@ -143,18 +99,68 @@ struct RecipeView: View {
                 recipePlateImage = plateImage
             }
             if let stepsImageData = recipe.stepsImageData,
-                let stepsImage = UIImage(data: stepsImageData) {
+               let stepsImage = UIImage(data: stepsImageData) {
                 recipeStepsImage = stepsImage
             }
         }
-        .sheet(isPresented: $showPlateImagePicker) {
-            ImagePicker(sourceType: .camera, selectedImage: self.$recipePlateImage)
-        }
-        .sheet(isPresented: $showStepsImagePicker) {
-            ImagePicker(sourceType: .camera, selectedImage: self.$recipeStepsImage)
-        }
         .sheet(isPresented: $showCategoryPicker) {
             CategoryListView(newCategory: "", categories: [])
+        }
+        .font(.brand)
+    }
+}
+
+struct ImagePickerView: View {
+    let title: String
+    @Binding private var image: UIImage?
+    @State private var actionSheetShown = false
+    @State private var fullScreenImageShown = false
+    @State private var takeAPhotoOption = false
+    @State private var chooseFromLibraryOption = false
+
+    init(title: String, image: Binding<UIImage?>) {
+        self.title = title
+        _image = image
+    }
+
+    var body: some View {
+        HStack {
+            Text(title)
+            Button {
+                if image == nil {
+                    actionSheetShown = true
+                } else {
+                    fullScreenImageShown = true
+                }
+            } label: {
+                Image(uiImage: image ?? UIImage(named: "ThumbnailPlaceholder")!)
+                    .resizable()
+                    .frame(width: 80, height: 80)
+                    .aspectRatio(contentMode: .fill)
+                    .cornerRadius(10)
+            }
+            Button {
+                self.image = nil
+            } label: {
+                Image(systemName: "trash")
+            }
+        }
+        .confirmationDialog("Select an option", isPresented: $actionSheetShown, titleVisibility: .hidden) {
+            Button("Take a photo") {
+                takeAPhotoOption = true
+            }
+            Button("Choose from library") {
+                chooseFromLibraryOption = true
+            }
+        }
+        .sheet(isPresented: $takeAPhotoOption) {
+            ImagePicker(sourceType: .camera, selectedImage: self.$image)
+        }
+        .sheet(isPresented: $chooseFromLibraryOption) {
+            ImagePicker(sourceType: .photoLibrary, selectedImage: self.$image)
+        }
+        .sheet(isPresented: $fullScreenImageShown) {
+            PhotoView(image: self.image!)
         }
     }
 }

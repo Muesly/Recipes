@@ -22,10 +22,16 @@ extension Recipe {
     }
 
     var plateImage: UIImage? {
-        UIImage(data: plateImageData ?? Data())
+        guard let data = plateImageData else {
+            return nil
+        }
+        return UIImage(data: data)
     }
 
     var stepsImage: UIImage? {
-        UIImage(data: stepsImageData ?? Data())
+        guard let data = stepsImageData else {
+            return nil
+        }
+        return UIImage(data: data)
     }
 }

@@ -22,6 +22,7 @@
 		EA2C9BDD29B7DBCD0019DB36 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA2C9BDC29B7DBCD0019DB36 /* Theme.swift */; };
 		EA2C9BE029B7DC050019DB36 /* Colours.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EA2C9BDF29B7DC050019DB36 /* Colours.xcassets */; };
 		EA2C9BE329B7DF750019DB36 /* CategoryListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA2C9BE229B7DF750019DB36 /* CategoryListView.swift */; };
+		EAFD607629DF20EC00038612 /* PhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAFD607529DF20EC00038612 /* PhotoView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,6 +61,7 @@
 		EA2C9BDC29B7DBCD0019DB36 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		EA2C9BDF29B7DC050019DB36 /* Colours.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colours.xcassets; sourceTree = "<group>"; };
 		EA2C9BE229B7DF750019DB36 /* CategoryListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryListView.swift; sourceTree = "<group>"; };
+		EAFD607529DF20EC00038612 /* PhotoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -142,6 +144,7 @@
 			isa = PBXGroup;
 			children = (
 				EA2C9BCE29B689F30019DB36 /* RecipeView.swift */,
+				EAFD607529DF20EC00038612 /* PhotoView.swift */,
 				EA2C9BDA29B6A30A0019DB36 /* ImagePicker.swift */,
 				EA2C9BD029B68B680019DB36 /* RecipeViewModel.swift */,
 			);
@@ -151,8 +154,8 @@
 		EA2C9BD729B68F920019DB36 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				EA2C9BA629B686E40019DB36 /* Persistence.swift */,
 				EA2C9BA829B686E40019DB36 /* Recipes.xcdatamodeld */,
+				EA2C9BA629B686E40019DB36 /* Persistence.swift */,
 				EA2C9BD829B68F9C0019DB36 /* Recipe.swift */,
 			);
 			path = Model;
@@ -310,6 +313,7 @@
 				EA2C9BA029B686E20019DB36 /* RecipeListView.swift in Sources */,
 				EA2C9BD929B68F9D0019DB36 /* Recipe.swift in Sources */,
 				EA2C9BE329B7DF750019DB36 /* CategoryListView.swift in Sources */,
+				EAFD607629DF20EC00038612 /* PhotoView.swift in Sources */,
 				EA2C9BD129B68B680019DB36 /* RecipeViewModel.swift in Sources */,
 				EA2C9B9E29B686E20019DB36 /* RecipesApp.swift in Sources */,
 				EA2C9BDB29B6A30A0019DB36 /* ImagePicker.swift in Sources */,

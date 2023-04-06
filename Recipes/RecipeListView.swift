@@ -64,6 +64,7 @@ struct RecipeListView: View {
             .navigationTitle("Recipes")
             .background(Colours.backgroundPrimary)
         }
+        .font(.brand)
     }
 
     private func deleteItem(atRow row: Int) {
