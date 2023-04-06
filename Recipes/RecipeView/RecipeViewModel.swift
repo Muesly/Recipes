@@ -37,8 +37,8 @@ class RecipeViewModel {
                     plateImage: UIImage?,
                     stepsImage: UIImage?) {
         recipe.name = name
-        recipe.plateImage = plateImage?.jpegData(compressionQuality: 0.9)
-        recipe.stepsImage = stepsImage?.jpegData(compressionQuality: 0.9)
+        recipe.plateImageData = plateImage?.jpegData(compressionQuality: 0.9)
+        recipe.stepsImageData = stepsImage?.jpegData(compressionQuality: 0.9)
 
         do {
             try viewContext.save()

@@ -99,17 +99,15 @@ struct RecipeView: View {
                 }
                 Spacer()
             }
+            .navigationTitle(recipeName.isEmpty ? "New Recipe" : recipeName)
+
             .padding()
-            .background(Colours.backgroundSecondary)
             .cornerRadius(20)
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
                     Button("Cancel") {
                         dismiss()
                     }
-                }
-                ToolbarItem(placement: .principal) {
-                    Text("New Recipe").font(.headline)
                 }
                 ToolbarItem(placement: .confirmationAction) {
                     Button("Save") {
@@ -140,11 +138,11 @@ struct RecipeView: View {
                 return
             }
             recipeName = name
-            if let plateImageData = recipe.plateImage,
+            if let plateImageData = recipe.plateImageData,
                let plateImage = UIImage(data: plateImageData) {
                 recipePlateImage = plateImage
             }
-            if let stepsImageData = recipe.stepsImage,
+            if let stepsImageData = recipe.stepsImageData,
                 let stepsImage = UIImage(data: stepsImageData) {
                 recipeStepsImage = stepsImage
             }

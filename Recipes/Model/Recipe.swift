@@ -17,7 +17,15 @@ extension Recipe {
         self.init(context: context)
         self.dateAdded = Date()
         self.name = name
-        self.plateImage = plateImage?.jpegData(compressionQuality: 0.9)
-        self.stepsImage = stepsImage?.jpegData(compressionQuality: 0.9)
+        self.plateImageData = plateImage?.jpegData(compressionQuality: 0.9)
+        self.stepsImageData = stepsImage?.jpegData(compressionQuality: 0.9)
+    }
+
+    var plateImage: UIImage? {
+        UIImage(data: plateImageData ?? Data())
+    }
+
+    var stepsImage: UIImage? {
+        UIImage(data: stepsImageData ?? Data())
     }
 }

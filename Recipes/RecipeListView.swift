@@ -20,35 +20,36 @@ struct RecipeListView: View {
 
     var body: some View {
         NavigationStack {
-            VStack {
-                List {
+            VStack(alignment: .center) {
+                Section {
                     Button {
                         showingAddRecipeView = true
                     } label: {
                         Text("Add a new recipe")
-                            .frame(maxWidth: .infinity, alignment: .center)
                             .bold()
                     }
-                    .listRowBackground(Colours.backgroundSecondary)
-                    ForEach(recipes) { recipe in
-                        Button {
-                            chosenRecipe = recipe
-                        } label: {
-                            HStack {
-                                Image(uiImage: UIImage(data: recipe.plateImage ?? Data()) ?? UIImage())
-                                    .frame(width: 40, height: 40)
-                                Image(uiImage: UIImage(data: recipe.stepsImage ?? Data()) ?? UIImage())
-                                    .frame(width: 40, height: 40)
-                                Text(recipe.name ?? "")
+                    .padding(5)
+                    .buttonStyle(.borderedProminent)
+                    .padding(5)
+                }
+                Section {
+                    List {
+                        ForEach(recipes) { recipe in
+                            Button {
+                                chosenRecipe = recipe
+                            } label: {
+                                HStack {
+                                    ThumbnailImageView(uiImage: recipe.plateImage)
+                                    Text(recipe.name ?? "")
+                                }
                             }
+                            .listRowBackground(Colours.backgroundSecondary)
                         }
-                        .listRowBackground(Colours.backgroundSecondary)
-                    }
-                    .onDelete { indexSet in
-                        self.deleteItem(atRow: indexSet.first!)
+                        .onDelete { indexSet in
+                            self.deleteItem(atRow: indexSet.first!)
+                        }
                     }
                 }
-                .padding(.top, 5)
                 .scrollContentBackground(.hidden)
                 .foregroundColor(Colours.foregroundPrimary)
                 .background(Colours.backgroundPrimary)
@@ -61,6 +62,7 @@ struct RecipeListView: View {
                 }
             }
             .navigationTitle("Recipes")
+            .background(Colours.backgroundPrimary)
         }
     }
 
@@ -75,6 +77,17 @@ struct RecipeListView: View {
                 }
             }
         }
+    }
+}
+
+struct ThumbnailImageView: View {
+    let uiImage: UIImage?
+
+    var body: some View {
+        Image(uiImage: uiImage ?? UIImage(named: "ThumbnailPlaceholder")!)
+            .resizable()
+            .frame(width: 40, height: 40)
+            .cornerRadius(5)
     }
 }
 
