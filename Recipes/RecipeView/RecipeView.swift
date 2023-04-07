@@ -55,7 +55,7 @@ struct RecipeView: View {
                 }
                 Spacer()
             }
-            .navigationTitle(recipeName.isEmpty ? "New Recipe" : recipeName)
+            .navigationTitle(RecipeViewModel.recipeTitle(for: recipeName))
 
             .padding()
             .cornerRadius(20)
@@ -68,16 +68,10 @@ struct RecipeView: View {
                 ToolbarItem(placement: .confirmationAction) {
                     Button("Save") {
                         recipeNameIsFocused = false
-                        if let recipe = recipe {
-                            viewModel.editRecipe(recipe: recipe,
-                                                 name: recipeName,
-                                                 plateImage: recipePlateImage,
-                                                 stepsImage: recipeStepsImage)
-                        } else {
-                            viewModel.addRecipe(name: recipeName,
-                                                plateImage: recipePlateImage,
-                                                stepsImage: recipeStepsImage)
-                        }
+                        viewModel.addOrEditRecipe(recipe: recipe,
+                                                  name: recipeName,
+                                                  plateImage: recipePlateImage,
+                                                  stepsImage: recipeStepsImage)
                         dismiss()
                     }
                     .disabled(recipeName.isEmpty)
@@ -87,6 +81,7 @@ struct RecipeView: View {
         }
         .padding()
         .background(Colours.backgroundPrimary)
+        .font(.brand)
         .onAppear {
             guard let recipe = recipe,
                   let name = recipe.name else {
@@ -106,7 +101,6 @@ struct RecipeView: View {
         .sheet(isPresented: $showCategoryPicker) {
             CategoryListView(newCategory: "", categories: [])
         }
-        .font(.brand)
     }
 }
 
@@ -139,10 +133,12 @@ struct ImagePickerView: View {
                     .aspectRatio(contentMode: .fill)
                     .cornerRadius(10)
             }
-            Button {
-                self.image = nil
-            } label: {
-                Image(systemName: "trash")
+            if image != nil {
+                Button {
+                    self.image = nil
+                } label: {
+                    Image(systemName: "trash")
+                }
             }
         }
         .confirmationDialog("Select an option", isPresented: $actionSheetShown, titleVisibility: .hidden) {

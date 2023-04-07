@@ -14,14 +14,17 @@ struct CategoryListView: View {
     @State private var showNewCategoryView = false
     @State var selectedItems = Set<String>()
 
+    @State private var categoryName: String = ""
+    @FocusState private var categoryNameIsFocused: Bool
+
     var body: some View {
         NavigationView {
             VStack {
-                Button {
-                    showNewCategoryView = true
-                } label: {
-                    Text("Add a new category")
-                }
+                TextField("Enter category name", text: $categoryName)
+                    .padding(5)
+                    .background(Colours.backgroundTertiary)
+                    .cornerRadius(10)
+                    .focused($categoryNameIsFocused)
                 .padding()
                 List(categories, id: \.self, selection: $selectedItems) { (item : String) in
 

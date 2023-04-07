@@ -17,34 +17,23 @@ class RecipeViewModel {
         self.viewContext = viewContext
     }
 
-    func addRecipe(name: String,
-                   plateImage: UIImage?,
-                   stepsImage: UIImage?) {
-        let _ = Recipe(context: viewContext, name: name, plateImage: plateImage, stepsImage: stepsImage)
-
-        do {
-            try viewContext.save()
-        } catch {
-            // Replace this implementation with code to handle the error appropriately.
-            // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-            let nsError = error as NSError
-            fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-        }
+    static func recipeTitle(for name: String) -> String {
+        return name.isEmpty ? "New Recipe" : name
     }
 
-    func editRecipe(recipe: Recipe,
-                    name: String,
-                    plateImage: UIImage?,
-                    stepsImage: UIImage?) {
-        recipe.name = name
-        recipe.plateImageData = plateImage?.jpegData(compressionQuality: 0.9)
-        recipe.stepsImageData = stepsImage?.jpegData(compressionQuality: 0.9)
+    func addOrEditRecipe(recipe: Recipe?,
+                         name: String,
+                         plateImage: UIImage?,
+                         stepsImage: UIImage?) {
+
+        let recipeToEdit = recipe ?? Recipe(context: viewContext, name: name, plateImage: plateImage, stepsImage: stepsImage)
+        recipeToEdit.name = name
+        recipeToEdit.plateImageData = plateImage?.jpegData(compressionQuality: 0.9)
+        recipeToEdit.stepsImageData = stepsImage?.jpegData(compressionQuality: 0.9)
 
         do {
             try viewContext.save()
         } catch {
-            // Replace this implementation with code to handle the error appropriately.
-            // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
             let nsError = error as NSError
             fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
         }
