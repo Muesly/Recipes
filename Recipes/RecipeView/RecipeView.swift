@@ -31,7 +31,7 @@ struct RecipeView: View {
                     Text("Recipe Name:")
                     TextField("Enter recipe name", text: $recipeName)
                         .padding(5)
-                        .background(Colours.backgroundTertiary)
+                        .background(Colours.backgroundSecondary)
                         .cornerRadius(10)
                         .focused($recipeNameIsFocused)
                 }

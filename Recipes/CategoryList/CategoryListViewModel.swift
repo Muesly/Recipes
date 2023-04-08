@@ -31,6 +31,12 @@ class CategoryListViewModel: ObservableObject {
         self._selectedCategories = selectedCategories
     }
 
+    var categoriesSelectedTitle: String {
+        let count = selectedCategories.count
+        let categoriesStr = (count == 1) ? "category" : "categories"
+        return "\(count) \(categoriesStr) selected"
+    }
+
     func setup() {
         let fetchRequest: NSFetchRequest<Category> = Category.fetchRequest()
         guard let results = try? viewContext.fetch(fetchRequest) else {

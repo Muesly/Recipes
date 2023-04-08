@@ -22,49 +22,54 @@ struct CategoryListView: View {
     var body: some View {
         NavigationView {
             VStack {
-                TextField("Enter category name", text: $categoryName)
-                    .padding(5)
-                    .background(Colours.backgroundTertiary)
+                TextField("Filter or enter new category name", text: $categoryName)
+                    .padding(10)
+                    .background(Colours.backgroundSecondary)
                     .cornerRadius(10)
                     .focused($categoryNameIsFocused)
+                    .padding()
                 List {
-                    ForEach(viewModel.filteredCategories, id: \.self) { categoryWithSelection in
-                        HStack {
-                            if categoryWithSelection.isSelected {
-                                Image(systemName: "checkmark.square")
-                            } else {
-                                Image(systemName: "square")
+                    Section {
+                        ForEach(viewModel.filteredCategories, id: \.self) { categoryWithSelection in
+                            HStack {
+                                Image(systemName: categoryWithSelection.isSelected ? "checkmark.square" : "square")
+                                Text(categoryWithSelection.category.name ?? "")
                             }
-                            Text(categoryWithSelection.category.name ?? "")
+                            .onTapGesture {
+                                viewModel.toggleCategory(categoryWithSelection)
+                            }
                         }
-                        .onTapGesture {
-                            viewModel.toggleCategory(categoryWithSelection)
+                        .onDelete { indexSet in
+                            viewModel.deleteCategories(categoryWithSelectionIndex: indexSet.first!)
                         }
-                    }
-                    .onDelete { indexSet in
-                        viewModel.deleteCategories(categoryWithSelectionIndex: indexSet.first!)
+                        .listRowBackground(Colours.backgroundSecondary)
+                    } header: {
+                        Text("Pick an existing category").foregroundColor(Colours.foregroundSecondary)
                     }
                 }
             }
-            .scrollContentBackground(.hidden)
-            .foregroundColor(Colours.foregroundPrimary)
-            .background(Colours.backgroundPrimary)
-            .padding()
             .toolbar {
+                ToolbarItem(placement: .status) {
+                    Text(viewModel.categoriesSelectedTitle)
+                }
                 ToolbarItem(placement: .confirmationAction) {
                     Button("Close") {
                         dismiss()
                     }
                 }
             }
-            .onSubmit {
-                viewModel.addCategory(name: categoryName)
-                viewModel.updateFilteredCategories(with: "")
-                categoryName = ""
-            }
-            .onChange(of: categoryName) { name in
-                viewModel.updateFilteredCategories(with: name)
-            }
+        }
+        .scrollContentBackground(.hidden)
+        .foregroundColor(Colours.foregroundPrimary)
+        .background(Colours.backgroundPrimary)
+        .onSubmit {
+            viewModel.addCategory(name: categoryName)
+            viewModel.updateFilteredCategories(with: "")
+            categoryName = ""
+        }
+        .onChange(of: categoryName) { name in
+            viewModel.updateFilteredCategories(with: name)
         }
     }
 }
+
