@@ -9,13 +9,15 @@ import SwiftUI
 
 struct CategoryListView: View {
     @Environment(\.dismiss) var dismiss
-    @State var newCategory: String = ""
-    @State var categories: [String]
-    @State private var showNewCategoryView = false
-    @State var selectedItems = Set<String>()
+    @ObservedObject private var viewModel: CategoryListViewModel
 
     @State private var categoryName: String = ""
     @FocusState private var categoryNameIsFocused: Bool
+
+    init(viewModel: CategoryListViewModel) {
+        self.viewModel = viewModel
+        viewModel.setup()
+    }
 
     var body: some View {
         NavigationView {
@@ -25,31 +27,28 @@ struct CategoryListView: View {
                     .background(Colours.backgroundTertiary)
                     .cornerRadius(10)
                     .focused($categoryNameIsFocused)
-                .padding()
-                List(categories, id: \.self, selection: $selectedItems) { (item : String) in
-
-                    let s = selectedItems.contains(item) ? "√" : " "
-                    HStack {
-                        Text(s+item)
-                        Spacer()
+                List {
+                    ForEach(viewModel.filteredCategories, id: \.self) { categoryWithSelection in
+                        HStack {
+                            if categoryWithSelection.isSelected {
+                                Image(systemName: "checkmark.square")
+                            } else {
+                                Image(systemName: "square")
+                            }
+                            Text(categoryWithSelection.category.name ?? "")
+                        }
+                        .onTapGesture {
+                            viewModel.toggleCategory(categoryWithSelection)
+                        }
                     }
-                    .contentShape(Rectangle())
-                    .onTapGesture {
-                        if selectedItems.contains(item) {
-                            selectedItems.remove(item)
-                        }
-                        else{
-                            selectedItems.insert(item)
-                        }
+                    .onDelete { indexSet in
+                        viewModel.deleteCategories(categoryWithSelectionIndex: indexSet.first!)
                     }
                 }
-                .scrollContentBackground(.hidden)
-                .background(Colours.backgroundSecondary)
             }
             .scrollContentBackground(.hidden)
             .foregroundColor(Colours.foregroundPrimary)
-            .background(Colours.backgroundSecondary)
-            .cornerRadius(20)
+            .background(Colours.backgroundPrimary)
             .padding()
             .toolbar {
                 ToolbarItem(placement: .confirmationAction) {
@@ -58,55 +57,13 @@ struct CategoryListView: View {
                     }
                 }
             }
-            .onChange(of: newCategory) { category in
-                categories.append(category)
+            .onSubmit {
+                viewModel.addCategory(name: categoryName)
+                viewModel.updateFilteredCategories(with: "")
+                categoryName = ""
             }
-        }
-        .sheet(isPresented: $showNewCategoryView) {
-            AddCategoryView(newCategory: $newCategory)
-        }
-    }
-}
-
-struct AddCategoryView: View {
-    @Environment(\.dismiss) var dismiss
-    @State var category: String = ""
-    @Binding var newCategory: String
-    @FocusState private var categoryIsFocused: Bool
-
-    var body: some View {
-        NavigationView {
-            VStack {
-                HStack {
-                    Text("Category:")
-                    TextField("Enter category", text: $category)
-                        .padding(5)
-                        .background(Colours.backgroundTertiary)
-                        .cornerRadius(10)
-                        .focused($categoryIsFocused)
-                }
-                .padding()
-                Spacer()
-            }
-            .foregroundColor(Colours.foregroundPrimary)
-            .background(Colours.backgroundSecondary)
-            .cornerRadius(20)
-            .toolbar {
-                ToolbarItem(placement: .cancellationAction) {
-                    Button("Cancel") {
-                        dismiss()
-                    }
-                }
-                ToolbarItem(placement: .confirmationAction) {
-                    Button("Save") {
-                        newCategory = category
-                        dismiss()
-                    }
-                    .disabled(category.isEmpty)
-                }
-            }
-            .onAppear {
-                categoryIsFocused = true
+            .onChange(of: categoryName) { name in
+                viewModel.updateFilteredCategories(with: name)
             }
         }
     }

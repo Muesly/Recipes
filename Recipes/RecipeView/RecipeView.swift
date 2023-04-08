@@ -16,6 +16,7 @@ struct RecipeView: View {
     private var recipe: Recipe?
     @State private var recipePlateImage: UIImage?
     @State private var recipeStepsImage: UIImage?
+    @State private var selectedCategories: [Category] = []
 
     init(viewModel: RecipeViewModel,
          recipe: Recipe? = nil) {
@@ -48,7 +49,7 @@ struct RecipeView: View {
                             Button {
                                 showCategoryPicker = true
                             } label: {
-                                Text("Pick...")
+                                Text(viewModel.categoriesButtonTitle(for: recipe))
                             }
                         }
                     }
@@ -97,9 +98,15 @@ struct RecipeView: View {
                let stepsImage = UIImage(data: stepsImageData) {
                 recipeStepsImage = stepsImage
             }
+            selectedCategories = (recipe.categories?.allObjects as? [Category]) ?? []
         }
         .sheet(isPresented: $showCategoryPicker) {
-            CategoryListView(newCategory: "", categories: [])
+            CategoryListView(viewModel: CategoryListViewModel(viewContext: viewModel.viewContext,
+                                                              selectedCategories: $selectedCategories))
+        }
+        .onChange(of: selectedCategories) { selectedCategories in
+            recipe?.categories = NSSet(array: selectedCategories)
+            print("Changing selected categories to \(selectedCategories.map {$0.name})")
         }
     }
 }

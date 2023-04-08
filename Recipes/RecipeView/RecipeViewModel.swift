@@ -11,7 +11,7 @@ import Foundation
 import SwiftUI
 
 class RecipeViewModel {
-    private let viewContext: NSManagedObjectContext
+    let viewContext: NSManagedObjectContext
 
     init(viewContext: NSManagedObjectContext) {
         self.viewContext = viewContext
@@ -19,6 +19,15 @@ class RecipeViewModel {
 
     static func recipeTitle(for name: String) -> String {
         return name.isEmpty ? "New Recipe" : name
+    }
+
+    func categoriesButtonTitle(for recipe: Recipe?) -> String {
+        if let categories = recipe?.categories?.allObjects as? [Category],
+           !categories.isEmpty {
+            return categories.map { $0.name! }.sorted().joined(separator: ",")
+        } else {
+            return "Pick..."
+        }
     }
 
     func addOrEditRecipe(recipe: Recipe?,
