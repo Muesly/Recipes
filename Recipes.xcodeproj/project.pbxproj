@@ -29,6 +29,7 @@
 		EA51E11229E1AE7500F5EC59 /* RatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA51E11129E1AE7500F5EC59 /* RatingView.swift */; };
 		EA51E11429E1B47100F5EC59 /* SuggestionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA51E11329E1B47100F5EC59 /* SuggestionsView.swift */; };
 		EA51E11A29E1D22900F5EC59 /* RecipeListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA51E11929E1D22900F5EC59 /* RecipeListViewModel.swift */; };
+		EA51E11C29E1E8E200F5EC59 /* RecipeListViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA51E11B29E1E8E200F5EC59 /* RecipeListViewModelTests.swift */; };
 		EA72714D29E08D35004FD801 /* CategoryListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA72714C29E08D35004FD801 /* CategoryListViewModel.swift */; };
 		EA72714F29E08D50004FD801 /* CategoryListViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA72714E29E08D50004FD801 /* CategoryListViewModelTests.swift */; };
 		EA72715129E0905F004FD801 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA72715029E0905F004FD801 /* Category.swift */; };
@@ -70,6 +71,7 @@
 		EA51E11129E1AE7500F5EC59 /* RatingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingView.swift; sourceTree = "<group>"; };
 		EA51E11329E1B47100F5EC59 /* SuggestionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestionsView.swift; sourceTree = "<group>"; };
 		EA51E11929E1D22900F5EC59 /* RecipeListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeListViewModel.swift; sourceTree = "<group>"; };
+		EA51E11B29E1E8E200F5EC59 /* RecipeListViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeListViewModelTests.swift; sourceTree = "<group>"; };
 		EA72714C29E08D35004FD801 /* CategoryListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryListViewModel.swift; sourceTree = "<group>"; };
 		EA72714E29E08D50004FD801 /* CategoryListViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryListViewModelTests.swift; sourceTree = "<group>"; };
 		EA72715029E0905F004FD801 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
@@ -115,15 +117,11 @@
 		EA2C9B9C29B686E20019DB36 /* Recipes */ = {
 			isa = PBXGroup;
 			children = (
-				EA2C9BDE29B7DBF10019DB36 /* Resources */,
 				EA2C9BD729B68F920019DB36 /* Model */,
-				EA2C9B9D29B686E20019DB36 /* RecipesApp.swift */,
-				EA2C9B9F29B686E20019DB36 /* RecipeListView.swift */,
-				EA51E11929E1D22900F5EC59 /* RecipeListViewModel.swift */,
+				EA51E11D29E1EE1700F5EC59 /* App */,
+				EA51E11F29E1EFB400F5EC59 /* Features */,
+				EA2C9BDE29B7DBF10019DB36 /* Resources */,
 				EA2C9BDC29B7DBCD0019DB36 /* Theme.swift */,
-				EA2C9BD229B68B6D0019DB36 /* RecipeView */,
-				EA51E10A29E19A8A00F5EC59 /* BookList */,
-				EA2C9BE129B7DF5E0019DB36 /* CategoryList */,
 			);
 			path = Recipes;
 			sourceTree = "<group>";
@@ -132,6 +130,7 @@
 			isa = PBXGroup;
 			children = (
 				EA2C9BB329B686E50019DB36 /* RecipeViewModelTests.swift */,
+				EA51E11B29E1E8E200F5EC59 /* RecipeListViewModelTests.swift */,
 				EA72714E29E08D50004FD801 /* CategoryListViewModelTests.swift */,
 			);
 			path = RecipesTests;
@@ -190,6 +189,34 @@
 				EA51E10D29E19AC600F5EC59 /* BookListViewModel.swift */,
 			);
 			path = BookList;
+			sourceTree = "<group>";
+		};
+		EA51E11D29E1EE1700F5EC59 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				EA2C9B9D29B686E20019DB36 /* RecipesApp.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		EA51E11E29E1EE3900F5EC59 /* RecipeListView */ = {
+			isa = PBXGroup;
+			children = (
+				EA2C9B9F29B686E20019DB36 /* RecipeListView.swift */,
+				EA51E11929E1D22900F5EC59 /* RecipeListViewModel.swift */,
+			);
+			path = RecipeListView;
+			sourceTree = "<group>";
+		};
+		EA51E11F29E1EFB400F5EC59 /* Features */ = {
+			isa = PBXGroup;
+			children = (
+				EA51E10A29E19A8A00F5EC59 /* BookList */,
+				EA2C9BE129B7DF5E0019DB36 /* CategoryList */,
+				EA51E11E29E1EE3900F5EC59 /* RecipeListView */,
+				EA2C9BD229B68B6D0019DB36 /* RecipeView */,
+			);
+			path = Features;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -321,6 +348,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EA51E11C29E1E8E200F5EC59 /* RecipeListViewModelTests.swift in Sources */,
 				EA72714F29E08D50004FD801 /* CategoryListViewModelTests.swift in Sources */,
 				EA2C9BB429B686E50019DB36 /* RecipeViewModelTests.swift in Sources */,
 			);

@@ -26,9 +26,7 @@ class BookListViewModel: ObservableObject {
 
     init(viewContext: NSManagedObjectContext) {
         self.viewContext = viewContext
-    }
 
-    func setup() {
         let fetchRequest: NSFetchRequest<Book> = Book.fetchRequest()
         guard let results = try? viewContext.fetch(fetchRequest) else {
             return

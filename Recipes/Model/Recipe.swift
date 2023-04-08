@@ -14,12 +14,22 @@ extension Recipe {
     convenience init(context: NSManagedObjectContext,
                      name: String,
                      plateImage: UIImage?,
-                     stepsImage: UIImage?) {
+                     stepsImage: UIImage?,
+                     categories: NSSet? = nil,
+                     book: Book? = nil,
+                     page: Int32 = 0,
+                     rating: Int16 = 4,
+                     suggestions: String = "") {
         self.init(context: context)
         self.dateAdded = Date()
         self.name = name
         self.plateImageData = plateImage?.jpegData(compressionQuality: Self.compressionQuality)
         self.stepsImageData = stepsImage?.jpegData(compressionQuality: Self.compressionQuality)
+        self.categories = categories
+        self.book = book
+        self.page = page
+        self.rating = rating
+        self.suggestions = suggestions
     }
 
     var plateImage: UIImage? {

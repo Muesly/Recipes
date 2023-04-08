@@ -18,15 +18,15 @@ final class CategoryListViewModelTests: XCTestCase {
     var container: NSPersistentContainer {
         controller.container
     }
-    var context: NSManagedObjectContext {
+    var viewContext: NSManagedObjectContext {
         container.viewContext
     }
 
     override func setUpWithError() throws {
         controller = PersistenceController(inMemory: true)
-        let selectedCategories = [Recipes.Category]()
-        let selectedCategoriesBinding: Binding<[Recipes.Category]> = .constant(selectedCategories)
-        subject = CategoryListViewModel(viewContext: context, selectedCategories: selectedCategoriesBinding)
+        let selectedCategories = NSSet()
+        let selectedCategoriesBinding: Binding<NSSet> = .constant(selectedCategories)
+        subject = CategoryListViewModel(viewContext: viewContext, selectedCategories: selectedCategoriesBinding)
     }
 
     override func tearDownWithError() throws {

@@ -22,7 +22,6 @@ struct BookListView: View {
         self.viewModel = viewModel
         self._selectedBook = selectedBook
         self._page = page
-        viewModel.setup()
     }
 
     var numberFormatter: NumberFormatter {

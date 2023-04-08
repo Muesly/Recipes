@@ -44,7 +44,12 @@ final class RecipeViewModelTests: XCTestCase {
         subject.addOrEditRecipe(recipe: nil,
                                 name: exampleRecipeName,
                                 plateImage: exampleImage,
-                                stepsImage: exampleImage)
+                                stepsImage: exampleImage,
+                                categories: nil,
+                                book: nil,
+                                page: 0,
+                                rating: 4,
+                                suggestions: "")
     }
 
     private func getSingleRecipe(name: String) -> Recipe? {
@@ -73,7 +78,12 @@ final class RecipeViewModelTests: XCTestCase {
         subject.addOrEditRecipe(recipe: recipe,
                                 name: modifiedRecipeName,
                                 plateImage: exampleImage,
-                                stepsImage: exampleImage)
+                                stepsImage: exampleImage,
+                                categories: nil,
+                                book: nil,
+                                page: 0,
+                                rating: 4,
+                                suggestions: "")
         let modifiedRecipe = try XCTUnwrap(getSingleRecipe(name: modifiedRecipeName), "Expected modified recipe")
         XCTAssertEqual(modifiedRecipe.name, modifiedRecipeName)
     }

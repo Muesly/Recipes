@@ -10,17 +10,17 @@ import SwiftUI
 
 class RecipeListViewModel: ObservableObject {
     @Published var filteredRecipes: [Recipe] = []
-    private let context: NSManagedObjectContext
+    let viewContext: NSManagedObjectContext
 
-    init(context: NSManagedObjectContext) {
-        self.context = context
+    init(viewContext: NSManagedObjectContext) {
+        self.viewContext = viewContext
     }
 
     func fetchRecipesWithFilter(_ filter: String) {
         let request = Recipe.fetchRequest()
 
         do {
-            let recipes = try context.fetch(request)
+            let recipes = try viewContext.fetch(request)
             filteredRecipes = recipes.filter { recipe in
                 if filter.isEmpty {
                     return true
@@ -46,6 +46,23 @@ class RecipeListViewModel: ObservableObject {
             }
         } catch {
             print("Failed to get recipes")
+        }
+    }
+
+    func deleteItem(atRow row: Int) {
+        _ = withAnimation {
+            Task {
+                deleteRecipe(filteredRecipes[row])
+            }
+        }
+    }
+
+    func deleteRecipe(_ recipe: Recipe) {
+        viewContext.delete(recipe)
+        do {
+            try viewContext.save()
+        } catch {
+            print("Failed to save delete")
         }
     }
 }
