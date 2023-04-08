@@ -21,24 +21,25 @@ class RecipeViewModel {
         return name.isEmpty ? "New Recipe" : name
     }
 
-    func categoriesButtonTitle(for recipe: Recipe?) -> String {
-        if let categories = recipe?.categories?.allObjects as? [Category],
-           !categories.isEmpty {
-            return categories.map { $0.name! }.sorted().joined(separator: ",")
-        } else {
-            return "Pick..."
-        }
-    }
-
     func addOrEditRecipe(recipe: Recipe?,
                          name: String,
                          plateImage: UIImage?,
-                         stepsImage: UIImage?) {
+                         stepsImage: UIImage?,
+                         categories: NSSet?,
+                         book: Book?,
+                         page: Int32,
+                         rating: Int16,
+                         suggestions: String) {
 
         let recipeToEdit = recipe ?? Recipe(context: viewContext, name: name, plateImage: plateImage, stepsImage: stepsImage)
         recipeToEdit.name = name
         recipeToEdit.plateImageData = plateImage?.jpegData(compressionQuality: 0.9)
         recipeToEdit.stepsImageData = stepsImage?.jpegData(compressionQuality: 0.9)
+        recipeToEdit.categories = categories
+        recipeToEdit.book = book
+        recipeToEdit.page = page
+        recipeToEdit.rating = rating
+        recipeToEdit.suggestions = suggestions
 
         do {
             try viewContext.save()

@@ -22,12 +22,9 @@ struct CategoryListView: View {
     var body: some View {
         NavigationView {
             VStack {
-                TextField("Filter or enter new category name", text: $categoryName)
-                    .padding(10)
-                    .background(Colours.backgroundSecondary)
-                    .cornerRadius(10)
-                    .focused($categoryNameIsFocused)
+                TextField("Filter or enter new category name", text: $categoryName).textFieldStyle(RecipeTextFieldStyle())
                     .padding()
+                    .focused($categoryNameIsFocused)
                 List {
                     Section {
                         ForEach(viewModel.filteredCategories, id: \.self) { categoryWithSelection in

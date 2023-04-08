@@ -20,6 +20,14 @@
 		EA2C9BDD29B7DBCD0019DB36 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA2C9BDC29B7DBCD0019DB36 /* Theme.swift */; };
 		EA2C9BE029B7DC050019DB36 /* Colours.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EA2C9BDF29B7DC050019DB36 /* Colours.xcassets */; };
 		EA2C9BE329B7DF750019DB36 /* CategoryListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA2C9BE229B7DF750019DB36 /* CategoryListView.swift */; };
+		EA51E10529E196A400F5EC59 /* ImagePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA51E10429E196A400F5EC59 /* ImagePickerView.swift */; };
+		EA51E10729E196C900F5EC59 /* CategoryPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA51E10629E196C900F5EC59 /* CategoryPickerView.swift */; };
+		EA51E10929E199AA00F5EC59 /* BookPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA51E10829E199AA00F5EC59 /* BookPickerView.swift */; };
+		EA51E10C29E19AA200F5EC59 /* BookListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA51E10B29E19AA200F5EC59 /* BookListView.swift */; };
+		EA51E10E29E19AC600F5EC59 /* BookListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA51E10D29E19AC600F5EC59 /* BookListViewModel.swift */; };
+		EA51E11029E19B6F00F5EC59 /* Book.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA51E10F29E19B6F00F5EC59 /* Book.swift */; };
+		EA51E11229E1AE7500F5EC59 /* RatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA51E11129E1AE7500F5EC59 /* RatingView.swift */; };
+		EA51E11429E1B47100F5EC59 /* SuggestionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA51E11329E1B47100F5EC59 /* SuggestionsView.swift */; };
 		EA72714D29E08D35004FD801 /* CategoryListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA72714C29E08D35004FD801 /* CategoryListViewModel.swift */; };
 		EA72714F29E08D50004FD801 /* CategoryListViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA72714E29E08D50004FD801 /* CategoryListViewModelTests.swift */; };
 		EA72715129E0905F004FD801 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA72715029E0905F004FD801 /* Category.swift */; };
@@ -52,6 +60,14 @@
 		EA2C9BDC29B7DBCD0019DB36 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		EA2C9BDF29B7DC050019DB36 /* Colours.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colours.xcassets; sourceTree = "<group>"; };
 		EA2C9BE229B7DF750019DB36 /* CategoryListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryListView.swift; sourceTree = "<group>"; };
+		EA51E10429E196A400F5EC59 /* ImagePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerView.swift; sourceTree = "<group>"; };
+		EA51E10629E196C900F5EC59 /* CategoryPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryPickerView.swift; sourceTree = "<group>"; };
+		EA51E10829E199AA00F5EC59 /* BookPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookPickerView.swift; sourceTree = "<group>"; };
+		EA51E10B29E19AA200F5EC59 /* BookListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookListView.swift; sourceTree = "<group>"; };
+		EA51E10D29E19AC600F5EC59 /* BookListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookListViewModel.swift; sourceTree = "<group>"; };
+		EA51E10F29E19B6F00F5EC59 /* Book.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Book.swift; sourceTree = "<group>"; };
+		EA51E11129E1AE7500F5EC59 /* RatingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingView.swift; sourceTree = "<group>"; };
+		EA51E11329E1B47100F5EC59 /* SuggestionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestionsView.swift; sourceTree = "<group>"; };
 		EA72714C29E08D35004FD801 /* CategoryListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryListViewModel.swift; sourceTree = "<group>"; };
 		EA72714E29E08D50004FD801 /* CategoryListViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryListViewModelTests.swift; sourceTree = "<group>"; };
 		EA72715029E0905F004FD801 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
@@ -103,6 +119,7 @@
 				EA2C9B9F29B686E20019DB36 /* RecipeListView.swift */,
 				EA2C9BDC29B7DBCD0019DB36 /* Theme.swift */,
 				EA2C9BD229B68B6D0019DB36 /* RecipeView */,
+				EA51E10A29E19A8A00F5EC59 /* BookList */,
 				EA2C9BE129B7DF5E0019DB36 /* CategoryList */,
 			);
 			path = Recipes;
@@ -121,6 +138,11 @@
 			isa = PBXGroup;
 			children = (
 				EA2C9BCE29B689F30019DB36 /* RecipeView.swift */,
+				EA51E11129E1AE7500F5EC59 /* RatingView.swift */,
+				EA51E11329E1B47100F5EC59 /* SuggestionsView.swift */,
+				EA51E10629E196C900F5EC59 /* CategoryPickerView.swift */,
+				EA51E10829E199AA00F5EC59 /* BookPickerView.swift */,
+				EA51E10429E196A400F5EC59 /* ImagePickerView.swift */,
 				EAFD607529DF20EC00038612 /* PhotoView.swift */,
 				EA2C9BDA29B6A30A0019DB36 /* ImagePicker.swift */,
 				EA2C9BD029B68B680019DB36 /* RecipeViewModel.swift */,
@@ -135,6 +157,7 @@
 				EA2C9BA629B686E40019DB36 /* Persistence.swift */,
 				EA2C9BD829B68F9C0019DB36 /* Recipe.swift */,
 				EA72715029E0905F004FD801 /* Category.swift */,
+				EA51E10F29E19B6F00F5EC59 /* Book.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -155,6 +178,15 @@
 				EA72714C29E08D35004FD801 /* CategoryListViewModel.swift */,
 			);
 			path = CategoryList;
+			sourceTree = "<group>";
+		};
+		EA51E10A29E19A8A00F5EC59 /* BookList */ = {
+			isa = PBXGroup;
+			children = (
+				EA51E10B29E19AA200F5EC59 /* BookListView.swift */,
+				EA51E10D29E19AC600F5EC59 /* BookListViewModel.swift */,
+			);
+			path = BookList;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -257,18 +289,26 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EA51E10C29E19AA200F5EC59 /* BookListView.swift in Sources */,
 				EA2C9BDD29B7DBCD0019DB36 /* Theme.swift in Sources */,
 				EA2C9BA729B686E40019DB36 /* Persistence.swift in Sources */,
+				EA51E11229E1AE7500F5EC59 /* RatingView.swift in Sources */,
 				EA2C9BA029B686E20019DB36 /* RecipeListView.swift in Sources */,
+				EA51E10929E199AA00F5EC59 /* BookPickerView.swift in Sources */,
+				EA51E10E29E19AC600F5EC59 /* BookListViewModel.swift in Sources */,
 				EA2C9BD929B68F9D0019DB36 /* Recipe.swift in Sources */,
+				EA51E10529E196A400F5EC59 /* ImagePickerView.swift in Sources */,
+				EA51E11429E1B47100F5EC59 /* SuggestionsView.swift in Sources */,
 				EA2C9BE329B7DF750019DB36 /* CategoryListView.swift in Sources */,
 				EAFD607629DF20EC00038612 /* PhotoView.swift in Sources */,
 				EA2C9BD129B68B680019DB36 /* RecipeViewModel.swift in Sources */,
+				EA51E11029E19B6F00F5EC59 /* Book.swift in Sources */,
 				EA2C9B9E29B686E20019DB36 /* RecipesApp.swift in Sources */,
 				EA72714D29E08D35004FD801 /* CategoryListViewModel.swift in Sources */,
 				EA72715129E0905F004FD801 /* Category.swift in Sources */,
 				EA2C9BDB29B6A30A0019DB36 /* ImagePicker.swift in Sources */,
 				EA2C9BAA29B686E40019DB36 /* Recipes.xcdatamodeld in Sources */,
+				EA51E10729E196C900F5EC59 /* CategoryPickerView.swift in Sources */,
 				EA2C9BCF29B689F30019DB36 /* RecipeView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

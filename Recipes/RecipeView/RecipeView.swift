@@ -10,13 +10,16 @@ import SwiftUI
 struct RecipeView: View {
     @Environment(\.dismiss) var dismiss
     @State private var recipeName: String = ""
-    @State private var showCategoryPicker = false
+    @State private var page: Int32 = 0
     @FocusState private var recipeNameIsFocused: Bool
     private let viewModel: RecipeViewModel
     private var recipe: Recipe?
     @State private var recipePlateImage: UIImage?
     @State private var recipeStepsImage: UIImage?
-    @State private var selectedCategories: [Category] = []
+    @State private var categories: NSSet = NSSet()
+    @State private var book: Book?
+    @State private var rating: Int16 = 4
+    @State private var suggestions: String = ""
 
     init(viewModel: RecipeViewModel,
          recipe: Recipe? = nil) {
@@ -28,33 +31,25 @@ struct RecipeView: View {
         NavigationView {
             VStack(alignment: .leading, spacing: 20) {
                 HStack {
-                    Text("Recipe Name:")
-                    TextField("Enter recipe name", text: $recipeName)
-                        .padding(5)
-                        .background(Colours.backgroundSecondary)
-                        .cornerRadius(10)
+                    Text("Recipe Name").modifier(RecipeFormTitleText())
+                    TextField("Enter recipe name", text: $recipeName).textFieldStyle(RecipeTextFieldStyle())
                         .focused($recipeNameIsFocused)
                 }
                 .padding(.top, 10)
                 .foregroundColor(Colours.foregroundPrimary)
-                ImagePickerView(title: "Photo of plate:", image: $recipePlateImage)
-                ImagePickerView(title: "Photo of steps:", image: $recipeStepsImage)
-                HStack {
-                    Button {
-                        showCategoryPicker = true
-                    } label: {
-                        HStack {
-                            Text("Categories:")
-                                .foregroundColor(Colours.foregroundPrimary)
-                            Button {
-                                showCategoryPicker = true
-                            } label: {
-                                Text(viewModel.categoriesButtonTitle(for: recipe))
-                            }
-                        }
-                    }
-                }
-                Spacer()
+                ImagePickerView(title: "Photo of plate", image: $recipePlateImage)
+                ImagePickerView(title: "Photo of steps", image: $recipeStepsImage)
+                CategoryPickerView(title: "Categories",
+                                   viewContext: viewModel.viewContext,
+                                   viewModel: CategoryPickerViewModel(recipe: recipe),
+                                   selectedCategories: $categories)
+                BookPickerView(title: "Book",
+                               viewContext: viewModel.viewContext,
+                               viewModel: BookPickerViewModel(recipe: recipe),
+                               selectedBook: $book,
+                               page: $page)
+                RatingView(rating: $rating)
+                SuggestionsView(suggestions: $suggestions)
             }
             .navigationTitle(RecipeViewModel.recipeTitle(for: recipeName))
 
@@ -72,7 +67,12 @@ struct RecipeView: View {
                         viewModel.addOrEditRecipe(recipe: recipe,
                                                   name: recipeName,
                                                   plateImage: recipePlateImage,
-                                                  stepsImage: recipeStepsImage)
+                                                  stepsImage: recipeStepsImage,
+                                                  categories: categories,
+                                                  book: book,
+                                                  page: page,
+                                                  rating: rating,
+                                                  suggestions: suggestions)
                         dismiss()
                     }
                     .disabled(recipeName.isEmpty)
@@ -98,72 +98,39 @@ struct RecipeView: View {
                let stepsImage = UIImage(data: stepsImageData) {
                 recipeStepsImage = stepsImage
             }
-            selectedCategories = (recipe.categories?.allObjects as? [Category]) ?? []
+            categories = recipe.categories ?? NSSet()
+            book = recipe.book
+            page = recipe.page
+            rating = recipe.rating
+            suggestions = recipe.suggestions ?? ""
         }
-        .sheet(isPresented: $showCategoryPicker) {
-            CategoryListView(viewModel: CategoryListViewModel(viewContext: viewModel.viewContext,
-                                                              selectedCategories: $selectedCategories))
+        .onChange(of: categories) { categories in
+            recipe?.categories = categories
         }
-        .onChange(of: selectedCategories) { selectedCategories in
-            recipe?.categories = NSSet(array: selectedCategories)
-            print("Changing selected categories to \(selectedCategories.map {$0.name})")
+        .onChange(of: book) { book in
+            recipe?.book = book
+        }
+        .onChange(of: page) { page in
+            recipe?.page = page
         }
     }
 }
 
-struct ImagePickerView: View {
-    let title: String
-    @Binding private var image: UIImage?
-    @State private var actionSheetShown = false
-    @State private var fullScreenImageShown = false
-    @State private var takeAPhotoOption = false
-    @State private var chooseFromLibraryOption = false
-
-    init(title: String, image: Binding<UIImage?>) {
-        self.title = title
-        _image = image
+struct RecipeTextFieldStyle: TextFieldStyle {
+    func _body(configuration: TextField<Self._Label>) -> some View {
+        configuration
+            .foregroundColor(Colours.foregroundPrimary)
+            .padding(5)
+            .background(Colours.backgroundSecondary)
+            .cornerRadius(10)
     }
+}
 
-    var body: some View {
-        HStack {
-            Text(title)
-            Button {
-                if image == nil {
-                    actionSheetShown = true
-                } else {
-                    fullScreenImageShown = true
-                }
-            } label: {
-                Image(uiImage: image ?? UIImage(named: "ThumbnailPlaceholder")!)
-                    .resizable()
-                    .frame(width: 80, height: 80)
-                    .aspectRatio(contentMode: .fill)
-                    .cornerRadius(10)
-            }
-            if image != nil {
-                Button {
-                    self.image = nil
-                } label: {
-                    Image(systemName: "trash")
-                }
-            }
-        }
-        .confirmationDialog("Select an option", isPresented: $actionSheetShown, titleVisibility: .hidden) {
-            Button("Take a photo") {
-                takeAPhotoOption = true
-            }
-            Button("Choose from library") {
-                chooseFromLibraryOption = true
-            }
-        }
-        .sheet(isPresented: $takeAPhotoOption) {
-            ImagePicker(sourceType: .camera, selectedImage: self.$image)
-        }
-        .sheet(isPresented: $chooseFromLibraryOption) {
-            ImagePicker(sourceType: .photoLibrary, selectedImage: self.$image)
-        }
-        .sheet(isPresented: $fullScreenImageShown) {
-            PhotoView(image: self.image!)
-        }
+struct RecipeFormTitleText: ViewModifier {
+    func body(content: Content) -> some View {
+        content
+            .foregroundColor(Colours.foregroundSecondary).opacity(0.7)
+            .frame(width: 120, alignment: .trailing)
+            .padding(.trailing, 10)
     }
 }

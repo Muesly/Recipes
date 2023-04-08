@@ -23,10 +23,10 @@ class CategoryListViewModel: ObservableObject {
         }
     }
     @Published var filteredCategories: [CategoryWithSelection] = []
-    @Binding var selectedCategories: [Category]
+    @Binding var selectedCategories: NSSet
 
     init(viewContext: NSManagedObjectContext,
-         selectedCategories: Binding<[Category]>) {
+         selectedCategories: Binding<NSSet>) {
         self.viewContext = viewContext
         self._selectedCategories = selectedCategories
     }
@@ -43,9 +43,7 @@ class CategoryListViewModel: ObservableObject {
             return
         }
         allCategories = results.map({ category in
-            let isSelected = selectedCategories.contains(where: { selectedCategory in
-                selectedCategory.name == category.name
-            })
+            let isSelected = selectedCategories.contains(category)
             return CategoryWithSelection(category: category, isSelected: isSelected)
         }).sorted(by: { c1, c2 in
             c1.category.name! < c2.category.name!
@@ -100,7 +98,7 @@ class CategoryListViewModel: ObservableObject {
             return
         }
         allCategories[foundCategoryIndex].setIsSelected(!allCategories[foundCategoryIndex].isSelected)
-        selectedCategories = allCategories.filter { $0.isSelected }.map { $0.category }
+        selectedCategories = NSSet(array: allCategories.filter { $0.isSelected }.map { $0.category })
     }
 }
 
