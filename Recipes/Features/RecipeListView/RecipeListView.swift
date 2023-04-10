@@ -10,6 +10,7 @@ import SwiftUI
 
 struct RecipeListView: View {
     @State private var showingAddRecipeView = false
+    @State private var showingGenerateRecipeView = false
     @State private var chosenRecipe: Recipe?
     @State private var recipeSearchStr: String = ""
     @FocusState private var recipeSearchStrIsFocused: Bool
@@ -26,14 +27,31 @@ struct RecipeListView: View {
                     TextField("Search for recipe...", text: $recipeSearchStr).textFieldStyle(RecipeTextFieldStyle())
                         .focused($recipeSearchStrIsFocused)
                         .padding()
-                    Button {
-                        showingAddRecipeView = true
-                    } label: {
-                        Text("Add a new recipe").bold()
+                    HStack(spacing: 0) {
+                        Button {
+                            showingGenerateRecipeView = true
+                        } label: {
+                            Label {
+                                Text("Generate a recipe").bold()
+                            } icon: {
+                                Image(systemName: "text.viewfinder")
+                            }
+                        }
+                        .padding(5)
+                        .buttonStyle(.borderedProminent)
+                        Button {
+                            showingAddRecipeView = true
+                        } label: {
+                            Label {
+                                Text("Add a recipe").bold()
+                            } icon: {
+                                Image(systemName: "plus")
+                            }
+                        }
+                        .padding(5)
+                        .buttonStyle(.borderedProminent)
                     }
-                    .padding(5)
-                    .buttonStyle(.borderedProminent)
-                    .padding(5)
+                    .padding(EdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 10))
                 }
                 Section {
                     List {
@@ -41,14 +59,29 @@ struct RecipeListView: View {
                             Button {
                                 chosenRecipe = recipe
                             } label: {
-                                HStack {
-                                    Image(uiImage: recipe.plateImage ?? UIImage(named: "ThumbnailPlaceholder")!)
-                                        .resizable()
-                                        .frame(width: 40, height: 40)
-                                        .cornerRadius(5)
-                                    Text(recipe.name ?? "")
-                                }
+                                ZStack(alignment: .leading) {
+                                    if let image = recipe.plateImage {
+                                        Image(uiImage: image)
+                                            .resizable()
+                                            .aspectRatio(contentMode: .fill)
+                                            .opacity(0.25)
+                                    }
+                                    HStack {
+                                        Image(uiImage: recipe.plateImage ?? UIImage(named: "ThumbnailPlaceholder")!)
+                                            .resizable()
+                                            .frame(width: 40, height: 40)
+                                            .cornerRadius(5)
+                                            .shadow(radius: 5)
+                                        Text(recipe.name ?? "")
+                                        if recipe.rating == 5 {
+                                            Image(systemName: "star.circle.fill")
+                                                .frame(width: 20)
+                                        }
+                                    }
+                                    .padding(10)
+                                }.frame(height: 60)
                             }
+                            .listRowInsets(EdgeInsets())
                             .listRowBackground(Colours.backgroundSecondary)
                         }
                         .onDelete { indexSet in
@@ -59,6 +92,9 @@ struct RecipeListView: View {
                 .scrollContentBackground(.hidden)
                 .foregroundColor(Colours.foregroundPrimary)
                 .background(Colours.backgroundPrimary)
+                .sheet(isPresented: $showingGenerateRecipeView) {
+                    GenerateRecipeView(viewModel: .init(viewContext: viewModel.viewContext))
+                }
                 .sheet(isPresented: $showingAddRecipeView) {
                     RecipeView(viewModel: .init(viewContext: viewModel.viewContext))
                 }

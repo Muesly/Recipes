@@ -25,6 +25,9 @@ struct RecipeView: View {
          recipe: Recipe? = nil) {
         self.viewModel = viewModel
         self.recipe = recipe
+
+        // Resizes naviation bar title
+        UILabel.appearance(whenContainedInInstancesOf: [UINavigationBar.self]).adjustsFontSizeToFitWidth = true
     }
 
     var body: some View {
@@ -39,6 +42,7 @@ struct RecipeView: View {
                 .foregroundColor(Colours.foregroundPrimary)
                 ImagePickerView(title: "Photo of plate", image: $recipePlateImage)
                 ImagePickerView(title: "Photo of steps", image: $recipeStepsImage)
+                SuggestionsView(suggestions: $suggestions)
                 CategoryPickerView(title: "Categories",
                                    viewContext: viewModel.viewContext,
                                    viewModel: CategoryPickerViewModel(recipe: recipe),
@@ -49,7 +53,7 @@ struct RecipeView: View {
                                selectedBook: $book,
                                page: $page)
                 RatingView(rating: $rating)
-                SuggestionsView(suggestions: $suggestions)
+                Spacer()
             }
             .navigationTitle(RecipeViewModel.recipeTitle(for: recipeName))
 
@@ -78,6 +82,7 @@ struct RecipeView: View {
                     .disabled(recipeName.isEmpty)
                 }
             }
+            .toolbarBackground(.visible, for: .navigationBar)
             .background(Colours.backgroundPrimary)
         }
         .padding()

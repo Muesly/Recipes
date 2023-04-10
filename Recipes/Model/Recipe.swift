@@ -13,8 +13,8 @@ extension Recipe {
     static var compressionQuality = 0.9
     convenience init(context: NSManagedObjectContext,
                      name: String,
-                     plateImage: UIImage?,
-                     stepsImage: UIImage?,
+                     plateImage: UIImage? = nil,
+                     stepsImage: UIImage? = nil,
                      categories: NSSet? = nil,
                      book: Book? = nil,
                      page: Int32 = 0,

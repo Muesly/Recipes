@@ -43,7 +43,7 @@ class RecipeListViewModel: ObservableObject {
                     return true
                 }
                 return false
-            }
+            }.sorted { $0.dateAdded! > $1.dateAdded! }
         } catch {
             print("Failed to get recipes")
         }
