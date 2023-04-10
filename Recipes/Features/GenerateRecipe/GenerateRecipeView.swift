@@ -12,7 +12,7 @@ struct GenerateRecipeView: View {
     @ObservedObject private var viewModel: GenerateRecipeViewModel
     @State var loading: Bool = false
     @State var showingError: Bool = false
-    @State private var categories: NSSet = NSSet()
+    @State private var selectedCategories: NSSet = NSSet()
 
     init(viewModel: GenerateRecipeViewModel) {
         self.viewModel = viewModel
@@ -21,12 +21,19 @@ struct GenerateRecipeView: View {
     var body: some View {
         NavigationStack {
             ScrollView {
+                HStack {
+                    CategoryPickerView(viewContext: viewModel.viewContext,
+                                       labelModifier: LeftAlignedRecipeFormTitleText(),
+                                       selectedCategories: $selectedCategories)
+                    Spacer()
+                }
+                .padding()
                 VStack(alignment: .center) {
                     Button {
                         Task {
                             do {
                                 loading = true
-                                try await viewModel.generateRecipe()
+                                try await viewModel.generateRecipe(categories: selectedCategories)
                                 loading = false
                             } catch {
                                 showingError = true
@@ -36,11 +43,6 @@ struct GenerateRecipeView: View {
                         if loading {
                             ProgressView()
                         } else {
-                            HStack {
-                                Text("Catagories: ")
-                                CategoryPickerView(viewContext: viewModel.viewContext,
-                                                   selectedCategories: $categories)
-                            }
                             Text("Generate me a Recipe")
                         }
                     }
@@ -80,6 +82,9 @@ struct GenerateRecipeView: View {
                 }
                 .navigationTitle("Hello, Chef")
                 .background(Colours.backgroundPrimary)
+                .onAppear {
+                    selectedCategories = viewModel.defaultSelectedCategories
+                }
                 .alert("Failed to find a generated recipe",
                        isPresented: $showingError) {
                     Button("OK", role: .cancel) {}
@@ -94,5 +99,12 @@ struct GenerateRecipeView: View {
             }
         }
         .font(.brand)
+    }
+}
+
+struct LeftAlignedRecipeFormTitleText: ViewModifier {
+    func body(content: Content) -> some View {
+        content
+            .foregroundColor(Colours.foregroundSecondary)
     }
 }

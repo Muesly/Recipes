@@ -8,14 +8,17 @@
 import CoreData
 import SwiftUI
 
-struct CategoryPickerView: View {
+struct CategoryPickerView<V>: View where V: ViewModifier {
     @State private var showCategoryPicker = false
     private let viewContext: NSManagedObjectContext
+    private let labelModifier: V
     @Binding private var selectedCategories: NSSet
 
     init(viewContext: NSManagedObjectContext,
+         labelModifier: V,
          selectedCategories: Binding<NSSet>) {
         self.viewContext = viewContext
+        self.labelModifier = labelModifier
         self._selectedCategories = selectedCategories
     }
 
@@ -26,7 +29,7 @@ struct CategoryPickerView: View {
             } label: {
                 HStack {
                     Text("Categories")
-                        .modifier(RecipeFormTitleText())
+                        .modifier(labelModifier)
                     Button {
                         showCategoryPicker = true
                     } label: {

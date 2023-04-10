@@ -20,8 +20,9 @@ class GenerateRecipeViewModel: ObservableObject {
         self.recipeGenerator = recipeGenerator
     }
 
-    func generateRecipe() async throws {
-        generatedRecipe = try await recipeGenerator.generate(typeOfMeal: "Italian dinner")
+    func generateRecipe(categories: NSSet) async throws {
+        let typeOfMeal = categories.map { ($0 as! Category).name! }.joined(separator: ", ")
+        generatedRecipe = try await recipeGenerator.generate(typeOfMeal: typeOfMeal)
     }
 
     func saveGeneratedRecipe() {
@@ -41,6 +42,12 @@ class GenerateRecipeViewModel: ObservableObject {
         } catch {
             print("Failed to save recipe: \(error)")
         }
+    }
+
+    var defaultSelectedCategories: NSSet {
+        var request = Category.fetchRequest()
+        request.predicate = NSPredicate(format: "name == %@", "Dinner")
+        return NSSet(array: ((try? viewContext.fetch(request)) ?? []))
     }
 }
 
