@@ -43,12 +43,9 @@ struct RecipeView: View {
                 ImagePickerView(title: "Photo of plate", image: $recipePlateImage)
                 ImagePickerView(title: "Photo of steps", image: $recipeStepsImage)
                 SuggestionsView(suggestions: $suggestions)
-                CategoryPickerView(title: "Categories",
-                                   viewContext: viewModel.viewContext,
-                                   viewModel: CategoryPickerViewModel(recipe: recipe),
+                CategoryPickerView(viewContext: viewModel.viewContext,
                                    selectedCategories: $categories)
-                BookPickerView(title: "Book",
-                               viewContext: viewModel.viewContext,
+                BookPickerView(viewContext: viewModel.viewContext,
                                viewModel: BookPickerViewModel(recipe: recipe),
                                selectedBook: $book,
                                page: $page)

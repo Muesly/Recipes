@@ -10,18 +10,12 @@ import SwiftUI
 
 struct CategoryPickerView: View {
     @State private var showCategoryPicker = false
-    private let title: String
     private let viewContext: NSManagedObjectContext
-    private let viewModel: CategoryPickerViewModel
     @Binding private var selectedCategories: NSSet
 
-    init(title: String,
-         viewContext: NSManagedObjectContext,
-         viewModel: CategoryPickerViewModel,
+    init(viewContext: NSManagedObjectContext,
          selectedCategories: Binding<NSSet>) {
-        self.title = title
         self.viewContext = viewContext
-        self.viewModel = viewModel
         self._selectedCategories = selectedCategories
     }
 
@@ -31,12 +25,12 @@ struct CategoryPickerView: View {
                 showCategoryPicker = true
             } label: {
                 HStack {
-                    Text(title)
+                    Text("Categories")
                         .modifier(RecipeFormTitleText())
                     Button {
                         showCategoryPicker = true
                     } label: {
-                        Text(viewModel.categoriesButtonTitle)
+                        Text(categoriesButtonTitle)
                     }
                 }
             }
@@ -46,21 +40,12 @@ struct CategoryPickerView: View {
                                                               selectedCategories: $selectedCategories))
         }
     }
-}
 
-class CategoryPickerViewModel {
-    private let recipe: Recipe?
-
-    init(recipe: Recipe?) {
-        self.recipe = recipe
-    }
-
-    var categoriesButtonTitle: String {
-        if let categories = recipe?.categories?.allObjects as? [Category],
-           !categories.isEmpty {
-            return categories.map { $0.name! }.sorted().joined(separator: ", ")
-        } else {
+    private var categoriesButtonTitle: String {
+        if Array(selectedCategories).isEmpty {
             return "Pick..."
+        } else {
+            return selectedCategories.map { ($0 as! Category).name! }.sorted().joined(separator: ", ")
         }
     }
 }

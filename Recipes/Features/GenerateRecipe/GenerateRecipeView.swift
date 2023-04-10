@@ -12,6 +12,7 @@ struct GenerateRecipeView: View {
     @ObservedObject private var viewModel: GenerateRecipeViewModel
     @State var loading: Bool = false
     @State var showingError: Bool = false
+    @State private var categories: NSSet = NSSet()
 
     init(viewModel: GenerateRecipeViewModel) {
         self.viewModel = viewModel
@@ -35,6 +36,11 @@ struct GenerateRecipeView: View {
                         if loading {
                             ProgressView()
                         } else {
+                            HStack {
+                                Text("Catagories: ")
+                                CategoryPickerView(viewContext: viewModel.viewContext,
+                                                   selectedCategories: $categories)
+                            }
                             Text("Generate me a Recipe")
                         }
                     }

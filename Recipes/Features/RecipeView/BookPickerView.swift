@@ -10,18 +10,15 @@ import SwiftUI
 
 struct BookPickerView: View {
     @State private var showBookPicker = false
-    private let title: String
     private let viewModel: BookPickerViewModel
     private let viewContext: NSManagedObjectContext
     @Binding private var selectedBook: Book?
     @Binding private var page: Int32
 
-    init(title: String,
-         viewContext: NSManagedObjectContext,
+    init(viewContext: NSManagedObjectContext,
          viewModel: BookPickerViewModel,
          selectedBook: Binding<Book?>,
          page: Binding<Int32>) {
-        self.title = title
         self.viewContext = viewContext
         self.viewModel = viewModel
         self._selectedBook = selectedBook
@@ -34,7 +31,7 @@ struct BookPickerView: View {
                 showBookPicker = true
             } label: {
                 HStack {
-                    Text(title)
+                    Text("Book")
                         .modifier(RecipeFormTitleText())
                     Button {
                         showBookPicker = true
