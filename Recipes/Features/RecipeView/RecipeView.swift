@@ -32,31 +32,50 @@ struct RecipeView: View {
 
     var body: some View {
         NavigationView {
-            VStack(alignment: .leading, spacing: 20) {
-                HStack {
-                    Text("Recipe Name").modifier(RecipeFormTitleText())
-                    TextField("Enter recipe name", text: $recipeName).textFieldStyle(RecipeTextFieldStyle())
-                        .focused($recipeNameIsFocused)
+            ScrollView {
+                VStack(alignment: .leading, spacing: 20) {
+                    HStack {
+                        Text("Recipe Name").modifier(RecipeFormTitleText())
+                        TextField("Enter recipe name", text: $recipeName).textFieldStyle(RecipeTextFieldStyle())
+                            .focused($recipeNameIsFocused)
+                    }
+                    .padding(.top, 10)
+                    .foregroundColor(Colours.foregroundPrimary)
+                    ImagePickerView(title: "Photo of plate", image: $recipePlateImage)
+                    if let recipe,
+                       let ingredients = recipe.ingredients,
+                       let method = recipe.method,
+                       let recipeDescription = recipe.recipeDescription {
+                        Text("\(recipeDescription)")
+                            .padding(EdgeInsets(top: 5, leading: 0, bottom: 5, trailing: 0))
+                        Text("Calories").bold()
+                        Text("\(recipe.calories)")
+                            .padding(.bottom, 5)
+                        Text("Ingredients").bold()
+                        Text(" ‣ \(ingredients.split(separator: "\t").joined(separator: "\n ‣ "))")
+                            .padding(.bottom, 5)
+                        Text("Method").bold()
+                        Text(" ‣ \(method.split(separator: "\t").joined(separator: "\n ‣ "))")
+                            .padding(.bottom, 5)
+                    } else {
+                        ImagePickerView(title: "Photo of steps", image: $recipeStepsImage)
+                    }
+                    SuggestionsView(suggestions: $suggestions)
+                    CategoryPickerView(viewContext: viewModel.viewContext,
+                                       labelModifier: RecipeFormTitleText(),
+                                       selectedCategories: $categories)
+                    if recipe?.book != nil {
+                        BookPickerView(viewContext: viewModel.viewContext,
+                                       viewModel: BookPickerViewModel(recipe: recipe),
+                                       selectedBook: $book,
+                                       page: $page)
+                    }
+                    RatingView(rating: $rating)
+                    Spacer()
                 }
-                .padding(.top, 10)
-                .foregroundColor(Colours.foregroundPrimary)
-                ImagePickerView(title: "Photo of plate", image: $recipePlateImage)
-                ImagePickerView(title: "Photo of steps", image: $recipeStepsImage)
-                SuggestionsView(suggestions: $suggestions)
-                CategoryPickerView(viewContext: viewModel.viewContext,
-                                   labelModifier: RecipeFormTitleText(),
-                                   selectedCategories: $categories)
-                BookPickerView(viewContext: viewModel.viewContext,
-                               viewModel: BookPickerViewModel(recipe: recipe),
-                               selectedBook: $book,
-                               page: $page)
-                RatingView(rating: $rating)
-                Spacer()
+                .padding()
             }
             .navigationTitle(RecipeViewModel.recipeTitle(for: recipeName))
-
-            .padding()
-            .cornerRadius(20)
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
                     Button("Cancel") {
@@ -83,7 +102,6 @@ struct RecipeView: View {
             .toolbarBackground(.visible, for: .navigationBar)
             .background(Colours.backgroundPrimary)
         }
-        .padding()
         .background(Colours.backgroundPrimary)
         .font(.brand)
         .onAppear {

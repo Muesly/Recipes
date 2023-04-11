@@ -92,13 +92,16 @@ struct RecipeListView: View {
                 .scrollContentBackground(.hidden)
                 .foregroundColor(Colours.foregroundPrimary)
                 .background(Colours.backgroundPrimary)
-                .sheet(isPresented: $showingGenerateRecipeView) {
+                .sheet(isPresented: $showingGenerateRecipeView,
+                       onDismiss: { viewModel.fetchRecipesWithFilter(recipeSearchStr)}) {
                     GenerateRecipeView(viewModel: .init(viewContext: viewModel.viewContext))
                 }
-                .sheet(isPresented: $showingAddRecipeView) {
+                .sheet(isPresented: $showingAddRecipeView,
+                       onDismiss: { viewModel.fetchRecipesWithFilter(recipeSearchStr)}) {
                     RecipeView(viewModel: .init(viewContext: viewModel.viewContext))
                 }
-                .sheet(item: $chosenRecipe) {
+                .sheet(item: $chosenRecipe,
+                       onDismiss: { viewModel.fetchRecipesWithFilter(recipeSearchStr)}) {
                     RecipeView(viewModel: .init(viewContext: viewModel.viewContext),
                                recipe: $0)
                 }

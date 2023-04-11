@@ -12,7 +12,9 @@ struct GenerateRecipeView: View {
     @ObservedObject private var viewModel: GenerateRecipeViewModel
     @State var loading: Bool = false
     @State var showingError: Bool = false
+    @State var showingPromptPreview: Bool = false
     @State private var selectedCategories: NSSet = NSSet()
+    @State var promptText: String = ""
 
     init(viewModel: GenerateRecipeViewModel) {
         self.viewModel = viewModel
@@ -26,14 +28,20 @@ struct GenerateRecipeView: View {
                                        labelModifier: LeftAlignedRecipeFormTitleText(),
                                        selectedCategories: $selectedCategories)
                     Spacer()
+                    Button {
+                        showingPromptPreview = true
+                    } label: {
+                        Text("Preview prompt")
+                    }
                 }
                 .padding()
                 VStack(alignment: .center) {
                     Button {
+                        loading = true
                         Task {
                             do {
-                                loading = true
-                                try await viewModel.generateRecipe(categories: selectedCategories)
+                                try await viewModel.generateRecipe(promptText: promptText)
+
                                 loading = false
                             } catch {
                                 showingError = true
@@ -51,26 +59,50 @@ struct GenerateRecipeView: View {
                     .padding()
                     if let recipe = viewModel.generatedRecipe {
                         VStack(alignment: .leading) {
-                            Text("\(recipe.recipeName)").bold()
+                            ZStack {
+                                Image(uiImage: viewModel.recipeImage ?? UIImage())
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fill)
+                                    .frame(maxWidth: .infinity, maxHeight: 240)
+                                    .clipped()
+                                VStack {
+                                    HStack {
+                                        Spacer()
+                                        Button {
+                                            viewModel.rotateImage()
+                                        } label: {
+                                            Image(systemName: "arrow.triangle.2.circlepath.camera")
+                                                .foregroundColor(.white)
+                                        }
+                                        .shadow(radius: 1)
+                                        .padding()
+                                    }
+                                    Spacer()
+                                    Text("\(recipe.recipeName)").font(.largeTitle)
+                                        .lineLimit(3)
+                                        .foregroundColor(.white)
+                                        .frame(maxWidth: .infinity, alignment: .leading)
+                                        .shadow(radius: 3)
+                                        .padding()
+                                }
+                            }
                             Text("\(recipe.description)")
+                                .padding(EdgeInsets(top: 5, leading: 0, bottom: 5, trailing: 0))
                             Text("Calories").bold()
                             Text("\(recipe.calories)")
+                                .padding(.bottom, 5)
                             Text("Ingredients").bold()
                             Text(" ‣ \(recipe.ingredients.joined(separator: "\n ‣ "))")
+                                .padding(.bottom, 5)
                             Text("Method").bold()
                             Text(" ‣ \(recipe.method.joined(separator: "\n ‣ "))")
+                                .padding(.bottom, 5)
                         }
                         .padding()
                         VStack {
                             Button {
-                                print("Will find an image")
-                            } label: {
-                                Text("Find an image")
-                                    .bold()
-                                    .frame(alignment: .center)
-                            }.padding()
-                            Button {
-                                viewModel.saveGeneratedRecipe()
+                                viewModel.saveGeneratedRecipe(categories: selectedCategories)
+                                dismiss()
                             } label: {
                                 Text("Save to my recipes")
                                     .bold()
@@ -80,16 +112,23 @@ struct GenerateRecipeView: View {
                     }
                     Spacer()
                 }
-                .navigationTitle("Hello, Chef")
-                .background(Colours.backgroundPrimary)
                 .onAppear {
                     selectedCategories = viewModel.defaultSelectedCategories
+                    promptText = viewModel.recipeGenerator.promptText(for: selectedCategories)
+                }
+                .onChange(of: selectedCategories) { selectedCategories in
+                    promptText = viewModel.recipeGenerator.promptText(for: selectedCategories)
                 }
                 .alert("Failed to find a generated recipe",
                        isPresented: $showingError) {
                     Button("OK", role: .cancel) {}
                 }
+                .sheet(isPresented: $showingPromptPreview) {
+                    PromptEditorView(promptText: $promptText)
+                }
             }
+            .navigationTitle("Hello, Chef")
+            .background(Colours.backgroundPrimary)
             .toolbar {
                 ToolbarItem(placement: .confirmationAction) {
                     Button("Close") {

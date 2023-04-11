@@ -44,6 +44,7 @@ struct CategoryListView: View {
                         Text("Pick an existing category").foregroundColor(Colours.foregroundSecondary)
                     }
                 }
+                .navigationTitle("Recipe Categories")
             }
             .toolbar {
                 ToolbarItem(placement: .status) {
