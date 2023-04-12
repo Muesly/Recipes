@@ -24,12 +24,6 @@ struct BookListView: View {
         self._page = page
     }
 
-    var numberFormatter: NumberFormatter {
-        let formatter = NumberFormatter()
-        formatter.zeroSymbol = ""
-        return formatter
-    }
-
     var body: some View {
         NavigationView {
             VStack {

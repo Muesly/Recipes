@@ -38,6 +38,10 @@
 		EA72714D29E08D35004FD801 /* CategoryListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA72714C29E08D35004FD801 /* CategoryListViewModel.swift */; };
 		EA72714F29E08D50004FD801 /* CategoryListViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA72714E29E08D50004FD801 /* CategoryListViewModelTests.swift */; };
 		EA72715129E0905F004FD801 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA72715029E0905F004FD801 /* Category.swift */; };
+		EAD8502729E747F700C93D57 /* Config.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = EAD8502529E7452400C93D57 /* Config.xcconfig */; };
+		EAD8502929E7557400C93D57 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD8502829E7557400C93D57 /* HomeView.swift */; };
+		EAD8502D29E756D200C93D57 /* MealPlannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD8502C29E756D200C93D57 /* MealPlannerView.swift */; };
+		EAD8502F29E756E600C93D57 /* ShoppingListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD8502E29E756E600C93D57 /* ShoppingListView.swift */; };
 		EAFD607629DF20EC00038612 /* PhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAFD607529DF20EC00038612 /* PhotoView.swift */; };
 /* End PBXBuildFile section */
 
@@ -85,6 +89,11 @@
 		EA72714C29E08D35004FD801 /* CategoryListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryListViewModel.swift; sourceTree = "<group>"; };
 		EA72714E29E08D50004FD801 /* CategoryListViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryListViewModelTests.swift; sourceTree = "<group>"; };
 		EA72715029E0905F004FD801 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
+		EAD8502529E7452400C93D57 /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
+		EAD8502629E7458E00C93D57 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		EAD8502829E7557400C93D57 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		EAD8502C29E756D200C93D57 /* MealPlannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealPlannerView.swift; sourceTree = "<group>"; };
+		EAD8502E29E756E600C93D57 /* ShoppingListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingListView.swift; sourceTree = "<group>"; };
 		EAFD607529DF20EC00038612 /* PhotoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -109,6 +118,7 @@
 		EA2C9B9129B686E20019DB36 = {
 			isa = PBXGroup;
 			children = (
+				EAD8502529E7452400C93D57 /* Config.xcconfig */,
 				EA2C9B9C29B686E20019DB36 /* Recipes */,
 				EA2C9BB229B686E50019DB36 /* RecipesTests */,
 				EA2C9B9B29B686E20019DB36 /* Products */,
@@ -127,9 +137,10 @@
 		EA2C9B9C29B686E20019DB36 /* Recipes */ = {
 			isa = PBXGroup;
 			children = (
-				EA2C9BD729B68F920019DB36 /* Model */,
 				EA51E11D29E1EE1700F5EC59 /* App */,
 				EA51E11F29E1EFB400F5EC59 /* Features */,
+				EAD8502629E7458E00C93D57 /* Info.plist */,
+				EA2C9BD729B68F920019DB36 /* Model */,
 				EA2C9BDE29B7DBF10019DB36 /* Resources */,
 				EA2C9BDC29B7DBCD0019DB36 /* Theme.swift */,
 			);
@@ -150,15 +161,15 @@
 		EA2C9BD229B68B6D0019DB36 /* RecipeView */ = {
 			isa = PBXGroup;
 			children = (
-				EA2C9BCE29B689F30019DB36 /* RecipeView.swift */,
-				EA51E11129E1AE7500F5EC59 /* RatingView.swift */,
-				EA51E11329E1B47100F5EC59 /* SuggestionsView.swift */,
-				EA51E10629E196C900F5EC59 /* CategoryPickerView.swift */,
 				EA51E10829E199AA00F5EC59 /* BookPickerView.swift */,
+				EA51E10629E196C900F5EC59 /* CategoryPickerView.swift */,
+				EA2C9BDA29B6A30A0019DB36 /* ImagePicker.swift */,
 				EA51E10429E196A400F5EC59 /* ImagePickerView.swift */,
 				EAFD607529DF20EC00038612 /* PhotoView.swift */,
-				EA2C9BDA29B6A30A0019DB36 /* ImagePicker.swift */,
+				EA51E11129E1AE7500F5EC59 /* RatingView.swift */,
+				EA2C9BCE29B689F30019DB36 /* RecipeView.swift */,
 				EA2C9BD029B68B680019DB36 /* RecipeViewModel.swift */,
+				EA51E11329E1B47100F5EC59 /* SuggestionsView.swift */,
 			);
 			path = RecipeView;
 			sourceTree = "<group>";
@@ -206,6 +217,7 @@
 			isa = PBXGroup;
 			children = (
 				EA2C9B9D29B686E20019DB36 /* RecipesApp.swift */,
+				EAD8502829E7557400C93D57 /* HomeView.swift */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -222,11 +234,13 @@
 		EA51E11F29E1EFB400F5EC59 /* Features */ = {
 			isa = PBXGroup;
 			children = (
-				EA51E12029E1FABC00F5EC59 /* GenerateRecipe */,
 				EA51E10A29E19A8A00F5EC59 /* BookList */,
 				EA2C9BE129B7DF5E0019DB36 /* CategoryList */,
+				EA51E12029E1FABC00F5EC59 /* GenerateRecipe */,
+				EAD8502A29E756B000C93D57 /* MealPlanner */,
 				EA51E11E29E1EE3900F5EC59 /* RecipeListView */,
 				EA2C9BD229B68B6D0019DB36 /* RecipeView */,
+				EAD8502B29E756BA00C93D57 /* ShoppingList */,
 			);
 			path = Features;
 			sourceTree = "<group>";
@@ -240,6 +254,22 @@
 				EA51E12729E4A12600F5EC59 /* PromptEditorView.swift */,
 			);
 			path = GenerateRecipe;
+			sourceTree = "<group>";
+		};
+		EAD8502A29E756B000C93D57 /* MealPlanner */ = {
+			isa = PBXGroup;
+			children = (
+				EAD8502C29E756D200C93D57 /* MealPlannerView.swift */,
+			);
+			path = MealPlanner;
+			sourceTree = "<group>";
+		};
+		EAD8502B29E756BA00C93D57 /* ShoppingList */ = {
+			isa = PBXGroup;
+			children = (
+				EAD8502E29E756E600C93D57 /* ShoppingListView.swift */,
+			);
+			path = ShoppingList;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -324,6 +354,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EA2C9BA229B686E40019DB36 /* Assets.xcassets in Resources */,
+				EAD8502729E747F700C93D57 /* Config.xcconfig in Resources */,
 				EA2C9BE029B7DC050019DB36 /* Colours.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -342,6 +373,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EAD8502929E7557400C93D57 /* HomeView.swift in Sources */,
 				EA51E12229E1FACB00F5EC59 /* GenerateRecipeView.swift in Sources */,
 				EA51E11A29E1D22900F5EC59 /* RecipeListViewModel.swift in Sources */,
 				EA51E10C29E19AA200F5EC59 /* BookListView.swift in Sources */,
@@ -351,6 +383,7 @@
 				EA2C9BA029B686E20019DB36 /* RecipeListView.swift in Sources */,
 				EA51E12429E1FB3600F5EC59 /* GenerateRecipeViewModel.swift in Sources */,
 				EA51E10929E199AA00F5EC59 /* BookPickerView.swift in Sources */,
+				EAD8502D29E756D200C93D57 /* MealPlannerView.swift in Sources */,
 				EA51E10E29E19AC600F5EC59 /* BookListViewModel.swift in Sources */,
 				EA2C9BD929B68F9D0019DB36 /* Recipe.swift in Sources */,
 				EA51E10529E196A400F5EC59 /* ImagePickerView.swift in Sources */,
@@ -361,6 +394,7 @@
 				EA51E11029E19B6F00F5EC59 /* Book.swift in Sources */,
 				EA2C9B9E29B686E20019DB36 /* RecipesApp.swift in Sources */,
 				EA72714D29E08D35004FD801 /* CategoryListViewModel.swift in Sources */,
+				EAD8502F29E756E600C93D57 /* ShoppingListView.swift in Sources */,
 				EA72715129E0905F004FD801 /* Category.swift in Sources */,
 				EA51E12829E4A12600F5EC59 /* PromptEditorView.swift in Sources */,
 				EA2C9BDB29B6A30A0019DB36 /* ImagePicker.swift in Sources */,
@@ -509,6 +543,7 @@
 		};
 		EA2C9BC429B686E50019DB36 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = EAD8502529E7452400C93D57 /* Config.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -517,6 +552,7 @@
 				DEVELOPMENT_TEAM = 3NT7YH4NA6;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Recipes/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "Please enable camera access in order to take photos of recipes and food imagery.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -538,6 +574,7 @@
 		};
 		EA2C9BC529B686E50019DB36 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = EAD8502529E7452400C93D57 /* Config.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -546,6 +583,7 @@
 				DEVELOPMENT_TEAM = 3NT7YH4NA6;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Recipes/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "Please enable camera access in order to take photos of recipes and food imagery.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;

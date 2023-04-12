@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>GPT API Key</key>
+	<string>$(GPT_API_KEY)</string>
+	<key>Google Image API CSE ID</key>
+	<string>$(GOOGLE_IMAGE_API_CSE_ID)</string>
+	<key>Google Image API Key</key>
+	<string>$(GOOGLE_IMAGE_API_KEY)</string>
+</dict>
+</plist>

@@ -45,4 +45,8 @@ extension Recipe {
         }
         return UIImage(data: data)
     }
+
+    var isGenerated: Bool {
+        return (ingredients != nil)  // Generated recipes have ingredients field defined
+    }
 }

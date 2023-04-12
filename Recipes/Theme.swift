@@ -27,3 +27,9 @@ struct ButtonText: ViewModifier {
             .frame(maxWidth: .infinity)
     }
 }
+
+var numberFormatter: NumberFormatter {
+    let formatter = NumberFormatter()
+    formatter.zeroSymbol = ""
+    return formatter
+}

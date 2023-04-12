@@ -10,8 +10,10 @@ import SwiftUI
 struct RecipeView: View {
     @Environment(\.dismiss) var dismiss
     @State private var recipeName: String = ""
-    @State private var page: Int32 = 0
     @FocusState private var recipeNameIsFocused: Bool
+    @State private var calories: Int32 = 0
+    @FocusState private var caloriesIsFocused: Bool
+    @State private var page: Int32 = 0
     private let viewModel: RecipeViewModel
     private var recipe: Recipe?
     @State private var recipePlateImage: UIImage?
@@ -43,6 +45,7 @@ struct RecipeView: View {
                     .foregroundColor(Colours.foregroundPrimary)
                     ImagePickerView(title: "Photo of plate", image: $recipePlateImage)
                     if let recipe,
+                       recipe.isGenerated,
                        let ingredients = recipe.ingredients,
                        let method = recipe.method,
                        let recipeDescription = recipe.recipeDescription {
@@ -59,12 +62,19 @@ struct RecipeView: View {
                             .padding(.bottom, 5)
                     } else {
                         ImagePickerView(title: "Photo of steps", image: $recipeStepsImage)
+                        HStack {
+                            Text("Calories").modifier(RecipeFormTitleText())
+                            TextField("Enter calories per portion", value: $calories, formatter: numberFormatter).textFieldStyle(RecipeTextFieldStyle())
+                                .frame(width: 100)
+                                .keyboardType(.numberPad)
+                                .focused($caloriesIsFocused)
+                        }
                     }
                     SuggestionsView(suggestions: $suggestions)
                     CategoryPickerView(viewContext: viewModel.viewContext,
                                        labelModifier: RecipeFormTitleText(),
                                        selectedCategories: $categories)
-                    if recipe?.book != nil {
+                    if (recipe == nil) || !recipe!.isGenerated {
                         BookPickerView(viewContext: viewModel.viewContext,
                                        viewModel: BookPickerViewModel(recipe: recipe),
                                        selectedBook: $book,
@@ -89,6 +99,7 @@ struct RecipeView: View {
                                                   name: recipeName,
                                                   plateImage: recipePlateImage,
                                                   stepsImage: recipeStepsImage,
+                                                  calories: calories,
                                                   categories: categories,
                                                   book: book,
                                                   page: page,
@@ -119,6 +130,7 @@ struct RecipeView: View {
                let stepsImage = UIImage(data: stepsImageData) {
                 recipeStepsImage = stepsImage
             }
+            calories = recipe.calories
             categories = recipe.categories ?? NSSet()
             book = recipe.book
             page = recipe.page

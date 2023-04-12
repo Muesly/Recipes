@@ -72,6 +72,7 @@ class CategoryListViewModel: ObservableObject {
         }
 
         allCategories.append(CategoryWithSelection(category: category, isSelected: true))
+        selectedCategories = selectedCategories.adding(category) as NSSet
         allCategories.sort(by: { c1, c2 in
             c1.category.name! < c2.category.name!
         })
@@ -98,7 +99,8 @@ class CategoryListViewModel: ObservableObject {
             return
         }
         allCategories[foundCategoryIndex].setIsSelected(!allCategories[foundCategoryIndex].isSelected)
-        selectedCategories = NSSet(array: allCategories.filter { $0.isSelected }.map { $0.category })
+        let selectedCategoriesArray = allCategories.filter { $0.isSelected }.map { $0.category }
+        selectedCategories = NSSet(array: selectedCategoriesArray)
     }
 }
 

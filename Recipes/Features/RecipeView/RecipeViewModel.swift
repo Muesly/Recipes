@@ -25,6 +25,7 @@ class RecipeViewModel {
                          name: String,
                          plateImage: UIImage?,
                          stepsImage: UIImage?,
+                         calories: Int32,
                          categories: NSSet?,
                          book: Book?,
                          page: Int32,
@@ -35,6 +36,7 @@ class RecipeViewModel {
         recipeToEdit.name = name
         recipeToEdit.plateImageData = plateImage?.jpegData(compressionQuality: 0.9)
         recipeToEdit.stepsImageData = stepsImage?.jpegData(compressionQuality: 0.9)
+        recipeToEdit.calories = calories
         recipeToEdit.categories = categories
         recipeToEdit.book = book
         recipeToEdit.page = page

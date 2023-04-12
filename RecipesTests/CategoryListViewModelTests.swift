@@ -57,4 +57,21 @@ final class CategoryListViewModelTests: XCTestCase {
         let unToggledCategory = try XCTUnwrap(subject.filteredCategories.first, "Expected a category")
         XCTAssertFalse(unToggledCategory.isSelected)
     }
+
+    func testCategoriesSelectedTitle() throws {
+        subject.addCategory(name: "Beef")
+        subject.addCategory(name: "Pasta")
+        subject.setup()
+        let beefCategory = try XCTUnwrap(subject.filteredCategories.first, "Expected a category")
+        subject.toggleCategory(beefCategory)
+
+        var actualTitle = subject.categoriesSelectedTitle
+        XCTAssertEqual(actualTitle, "1 category selected")
+
+        let pastaCategory = try XCTUnwrap(subject.filteredCategories.last, "Expected a category")
+        subject.toggleCategory(pastaCategory)
+
+        actualTitle = subject.categoriesSelectedTitle
+        XCTAssertEqual(actualTitle, "2 categories selected")
+    }
 }

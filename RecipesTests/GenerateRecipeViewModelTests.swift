@@ -34,17 +34,21 @@ class GenerateRecipeViewModelTests: XCTest {
         subject = nil
     }
 
-    func testGeneratingARecipe() throws {
+    func testGeneratingARecipe() async throws {
         mockRecipeGenerator.generatedName = "Generated Recipe"
-        let recipe = try XCTUnwrap(subject.generateRecipe())
-        XCTAssertEqual(recipe.name, "Generated Recipe")
+        try await subject.generateRecipe(promptText: "Test")
+        XCTAssertEqual(subject.generatedRecipe?.recipeName, "Generated Recipe")
     }
 }
 
 struct MockRecipeGenerator: RecipeGenerating {
-    var generatedName: String?
-
-    func generate() -> GeneratedRecipe {
-        return .init(name: generatedName!)
+    func promptText(for categories: NSSet) -> String {
+        return ""
     }
+
+    func generate(for promptText: String) async throws -> Recipes.GeneratedRecipe {
+        return GeneratedRecipe(recipeName: "", calories: 0, description: "", ingredients: [], method: [])
+    }
+
+    var generatedName: String?
 }

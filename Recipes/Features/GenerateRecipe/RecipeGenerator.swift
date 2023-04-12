@@ -19,8 +19,6 @@ enum RecipeGeneratorError: Error {
 }
 
 struct RecipeGenerator: RecipeGenerating {
-    let apiKey = ""
-
     func promptText(for categories: NSSet) -> String {
         let typeOfMeal = categories.map { ($0 as! Category).name! }.joined(separator: ", ")
 
@@ -32,6 +30,7 @@ struct RecipeGenerator: RecipeGenerating {
     }
 
     func generate(for promptText: String) async throws -> GeneratedRecipe {
+        let apiKey = Bundle.main.infoDictionary!["GPT API Key"]!
         let urlString = "https://api.openai.com/v1/chat/completions"
         var request = URLRequest(url: URL(string: urlString)!)
         request.httpMethod = "POST"

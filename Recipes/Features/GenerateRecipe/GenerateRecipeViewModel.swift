@@ -63,8 +63,8 @@ class GenerateRecipeViewModel: ObservableObject {
     }
 
     func findRecipeImage(recipeName: String) async {
-        let cseId = ""
-        let apiKey = ""
+        let cseId = Bundle.main.infoDictionary!["Google Image API CSE ID"]!
+        let apiKey = Bundle.main.infoDictionary!["Google Image API Key"]!
         let name = recipeName.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
 
         do {
