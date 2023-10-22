@@ -137,15 +137,6 @@ struct RecipeView: View {
             rating = recipe.rating
             suggestions = recipe.suggestions ?? ""
         }
-        .onChange(of: categories) { categories in
-            recipe?.categories = categories
-        }
-        .onChange(of: book) { book in
-            recipe?.book = book
-        }
-        .onChange(of: page) { page in
-            recipe?.page = page
-        }
     }
 }
 

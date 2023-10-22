@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		EA162A2A29E9EB3D00F1CED3 /* MealPlan.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA162A2929E9EB3D00F1CED3 /* MealPlan.swift */; };
+		EA162A2C29E9ECAB00F1CED3 /* MealPlannerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA162A2B29E9ECAB00F1CED3 /* MealPlannerViewModel.swift */; };
+		EA162A2E29EA01B200F1CED3 /* Meal.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA162A2D29EA01B200F1CED3 /* Meal.swift */; };
 		EA2C9B9E29B686E20019DB36 /* RecipesApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA2C9B9D29B686E20019DB36 /* RecipesApp.swift */; };
 		EA2C9BA029B686E20019DB36 /* RecipeListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA2C9B9F29B686E20019DB36 /* RecipeListView.swift */; };
 		EA2C9BA229B686E40019DB36 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EA2C9BA129B686E40019DB36 /* Assets.xcassets */; };
@@ -38,6 +41,8 @@
 		EA72714D29E08D35004FD801 /* CategoryListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA72714C29E08D35004FD801 /* CategoryListViewModel.swift */; };
 		EA72714F29E08D50004FD801 /* CategoryListViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA72714E29E08D50004FD801 /* CategoryListViewModelTests.swift */; };
 		EA72715129E0905F004FD801 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA72715029E0905F004FD801 /* Category.swift */; };
+		EAC9A4FE29EC79C70026CEE4 /* DayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC9A4FD29EC79C70026CEE4 /* DayView.swift */; };
+		EAC9A50029EC7AFC0026CEE4 /* DayViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC9A4FF29EC7AFC0026CEE4 /* DayViewModel.swift */; };
 		EAD8502729E747F700C93D57 /* Config.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = EAD8502529E7452400C93D57 /* Config.xcconfig */; };
 		EAD8502929E7557400C93D57 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD8502829E7557400C93D57 /* HomeView.swift */; };
 		EAD8502D29E756D200C93D57 /* MealPlannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD8502C29E756D200C93D57 /* MealPlannerView.swift */; };
@@ -56,6 +61,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		EA162A2929E9EB3D00F1CED3 /* MealPlan.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealPlan.swift; sourceTree = "<group>"; };
+		EA162A2B29E9ECAB00F1CED3 /* MealPlannerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealPlannerViewModel.swift; sourceTree = "<group>"; };
+		EA162A2D29EA01B200F1CED3 /* Meal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Meal.swift; sourceTree = "<group>"; };
 		EA2C9B9A29B686E20019DB36 /* Recipes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Recipes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EA2C9B9D29B686E20019DB36 /* RecipesApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipesApp.swift; sourceTree = "<group>"; };
 		EA2C9B9F29B686E20019DB36 /* RecipeListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeListView.swift; sourceTree = "<group>"; };
@@ -89,6 +97,8 @@
 		EA72714C29E08D35004FD801 /* CategoryListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryListViewModel.swift; sourceTree = "<group>"; };
 		EA72714E29E08D50004FD801 /* CategoryListViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryListViewModelTests.swift; sourceTree = "<group>"; };
 		EA72715029E0905F004FD801 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
+		EAC9A4FD29EC79C70026CEE4 /* DayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayView.swift; sourceTree = "<group>"; };
+		EAC9A4FF29EC7AFC0026CEE4 /* DayViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayViewModel.swift; sourceTree = "<group>"; };
 		EAD8502529E7452400C93D57 /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 		EAD8502629E7458E00C93D57 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		EAD8502829E7557400C93D57 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
@@ -182,6 +192,8 @@
 				EA2C9BD829B68F9C0019DB36 /* Recipe.swift */,
 				EA72715029E0905F004FD801 /* Category.swift */,
 				EA51E10F29E19B6F00F5EC59 /* Book.swift */,
+				EA162A2D29EA01B200F1CED3 /* Meal.swift */,
+				EA162A2929E9EB3D00F1CED3 /* MealPlan.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -260,6 +272,9 @@
 			isa = PBXGroup;
 			children = (
 				EAD8502C29E756D200C93D57 /* MealPlannerView.swift */,
+				EAC9A4FD29EC79C70026CEE4 /* DayView.swift */,
+				EAC9A4FF29EC7AFC0026CEE4 /* DayViewModel.swift */,
+				EA162A2B29E9ECAB00F1CED3 /* MealPlannerViewModel.swift */,
 			);
 			path = MealPlanner;
 			sourceTree = "<group>";
@@ -374,9 +389,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				EAD8502929E7557400C93D57 /* HomeView.swift in Sources */,
+				EAC9A4FE29EC79C70026CEE4 /* DayView.swift in Sources */,
 				EA51E12229E1FACB00F5EC59 /* GenerateRecipeView.swift in Sources */,
 				EA51E11A29E1D22900F5EC59 /* RecipeListViewModel.swift in Sources */,
 				EA51E10C29E19AA200F5EC59 /* BookListView.swift in Sources */,
+				EA162A2E29EA01B200F1CED3 /* Meal.swift in Sources */,
+				EA162A2C29E9ECAB00F1CED3 /* MealPlannerViewModel.swift in Sources */,
 				EA2C9BDD29B7DBCD0019DB36 /* Theme.swift in Sources */,
 				EA2C9BA729B686E40019DB36 /* Persistence.swift in Sources */,
 				EA51E11229E1AE7500F5EC59 /* RatingView.swift in Sources */,
@@ -388,6 +406,7 @@
 				EA2C9BD929B68F9D0019DB36 /* Recipe.swift in Sources */,
 				EA51E10529E196A400F5EC59 /* ImagePickerView.swift in Sources */,
 				EA51E11429E1B47100F5EC59 /* SuggestionsView.swift in Sources */,
+				EA162A2A29E9EB3D00F1CED3 /* MealPlan.swift in Sources */,
 				EA2C9BE329B7DF750019DB36 /* CategoryListView.swift in Sources */,
 				EAFD607629DF20EC00038612 /* PhotoView.swift in Sources */,
 				EA2C9BD129B68B680019DB36 /* RecipeViewModel.swift in Sources */,
@@ -400,6 +419,7 @@
 				EA2C9BDB29B6A30A0019DB36 /* ImagePicker.swift in Sources */,
 				EA2C9BAA29B686E40019DB36 /* Recipes.xcdatamodeld in Sources */,
 				EA51E12A29E4AE1C00F5EC59 /* RecipeGenerator.swift in Sources */,
+				EAC9A50029EC7AFC0026CEE4 /* DayViewModel.swift in Sources */,
 				EA51E10729E196C900F5EC59 /* CategoryPickerView.swift in Sources */,
 				EA2C9BCF29B689F30019DB36 /* RecipeView.swift in Sources */,
 			);
@@ -559,6 +579,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -566,6 +587,9 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.tonyshort.recipes.Recipes;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -590,6 +614,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -597,6 +622,9 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.tonyshort.recipes.Recipes;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

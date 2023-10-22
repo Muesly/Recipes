@@ -11,12 +11,18 @@ import SwiftUI
 class RecipeListViewModel: ObservableObject {
     @Published var filteredRecipes: [Recipe] = []
     let viewContext: NSManagedObjectContext
+    private var filter: String = ""
 
     init(viewContext: NSManagedObjectContext) {
         self.viewContext = viewContext
     }
 
     func fetchRecipesWithFilter(_ filter: String) {
+        self.filter = filter
+        updateRecipes()
+    }
+
+    private func updateRecipes() {
         let request = Recipe.fetchRequest()
 
         do {
@@ -63,6 +69,29 @@ class RecipeListViewModel: ObservableObject {
             try viewContext.save()
         } catch {
             print("Failed to save delete")
+        }
+    }
+
+    func cellMealPlanButtonIcon(for recipe: Recipe) -> String {
+        (recipe.mealPlan != nil) ? "checkmark" : "plus"
+    }
+
+    func addOrRemoveRecipeFromMealPlan(_ recipe: Recipe) {
+        let request = MealPlan.fetchRequest()
+
+        var mealPlan = try? viewContext.fetch(request).first
+        if mealPlan == nil {
+            mealPlan = MealPlan(viewContext: viewContext)
+        }
+        if recipe.mealPlan == nil {
+            mealPlan?.addToRecipes(recipe)
+        } else {
+            mealPlan?.removeFromRecipes(recipe)
+        }
+        do {
+            try viewContext.save()
+        } catch {
+            print("Failed to add recipe to meal plan: \(error)")
         }
     }
 }

@@ -32,11 +32,12 @@ extension Recipe {
         self.suggestions = suggestions
     }
 
-    var plateImage: UIImage? {
-        guard let data = plateImageData else {
-            return nil
+    var plateImage: UIImage {
+        guard let data = plateImageData,
+              let image = UIImage(data: data) else {
+            return UIImage(named: "ThumbnailPlaceholder")!
         }
-        return UIImage(data: data)
+        return image
     }
 
     var stepsImage: UIImage? {

@@ -21,7 +21,7 @@ struct HomeView: View {
                 .tabItem {
                     Label("Recipes", systemImage: "fork.knife.circle")
                 }
-            MealPlannerView()
+            MealPlannerView(viewModel: .init(context: viewContext))
                 .tabItem {
                     Label("Meal Planner", systemImage: "calendar.circle")
                 }

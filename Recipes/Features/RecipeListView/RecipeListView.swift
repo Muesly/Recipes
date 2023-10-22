@@ -59,27 +59,8 @@ struct RecipeListView: View {
                             Button {
                                 chosenRecipe = recipe
                             } label: {
-                                ZStack(alignment: .leading) {
-                                    if let image = recipe.plateImage {
-                                        Image(uiImage: image)
-                                            .resizable()
-                                            .aspectRatio(contentMode: .fill)
-                                            .opacity(0.25)
-                                    }
-                                    HStack {
-                                        Image(uiImage: recipe.plateImage ?? UIImage(named: "ThumbnailPlaceholder")!)
-                                            .resizable()
-                                            .frame(width: 40, height: 40)
-                                            .cornerRadius(5)
-                                            .shadow(radius: 5)
-                                        Text(recipe.name ?? "")
-                                        if recipe.rating == 5 {
-                                            Image(systemName: "star.circle.fill")
-                                                .frame(width: 20)
-                                        }
-                                    }
-                                    .padding(10)
-                                }.frame(height: 60)
+                                RecipeCell(recipe: recipe,
+                                           viewModel: viewModel)
                             }
                             .listRowInsets(EdgeInsets())
                             .listRowBackground(Colours.backgroundSecondary)
@@ -116,5 +97,42 @@ struct RecipeListView: View {
             .background(Colours.backgroundPrimary)
         }
         .font(.brand)
+    }
+}
+
+struct RecipeCell: View {
+    let recipe: Recipe
+    let viewModel: RecipeListViewModel
+    @State private var mealPlanButtonIcon: String?
+
+    var body: some View {
+        ZStack(alignment: .leading) {
+            if let image = recipe.plateImage {
+                Image(uiImage: image)
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+                    .opacity(0.25)
+            }
+            HStack {
+                Image(uiImage: recipe.plateImage)
+                    .resizable()
+                    .frame(width: 40, height: 40)
+                    .cornerRadius(5)
+                    .shadow(radius: 5)
+                Text(recipe.name ?? "")
+                if recipe.rating == 5 {
+                    Image(systemName: "star.circle.fill")
+                        .frame(width: 20)
+                }
+                Spacer()
+                Button {
+                    viewModel.addOrRemoveRecipeFromMealPlan(recipe)
+                    mealPlanButtonIcon = viewModel.cellMealPlanButtonIcon(for: recipe)
+                } label: {
+                    Image(systemName: mealPlanButtonIcon ?? viewModel.cellMealPlanButtonIcon(for: recipe))
+                }
+            }
+            .padding(10)
+        }.frame(height: 60)
     }
 }

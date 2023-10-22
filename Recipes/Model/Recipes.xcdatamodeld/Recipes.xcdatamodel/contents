@@ -8,6 +8,19 @@
         <attribute name="name" attributeType="String"/>
         <relationship name="recipes" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Recipe" inverseName="categories" inverseEntity="Recipe"/>
     </entity>
+    <entity name="Meal" representedClassName="Meal" syncable="YES" codeGenerationType="class">
+        <attribute name="day" optional="YES" attributeType="String"/>
+        <attribute name="frozen" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
+        <attribute name="notes" optional="YES" attributeType="String"/>
+        <attribute name="person1Present" attributeType="Boolean" defaultValueString="YES" usesScalarValueType="YES"/>
+        <attribute name="person2Present" attributeType="Boolean" defaultValueString="YES" usesScalarValueType="YES"/>
+        <relationship name="mealPlan" maxCount="1" deletionRule="Nullify" destinationEntity="MealPlan" inverseName="meals" inverseEntity="MealPlan"/>
+        <relationship name="recipe" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Recipe" inverseName="meal" inverseEntity="Recipe"/>
+    </entity>
+    <entity name="MealPlan" representedClassName="MealPlan" syncable="YES" codeGenerationType="class">
+        <relationship name="meals" toMany="YES" deletionRule="Nullify" destinationEntity="Meal" inverseName="mealPlan" inverseEntity="Meal"/>
+        <relationship name="recipes" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Recipe" inverseName="mealPlan" inverseEntity="Recipe"/>
+    </entity>
     <entity name="Recipe" representedClassName="Recipe" syncable="YES" codeGenerationType="class">
         <attribute name="calories" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="dateAdded" attributeType="Date" usesScalarValueType="NO"/>
@@ -22,5 +35,7 @@
         <attribute name="suggestions" optional="YES" attributeType="String"/>
         <relationship name="book" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Book" inverseName="recipes" inverseEntity="Book"/>
         <relationship name="categories" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Category" inverseName="recipes" inverseEntity="Category"/>
+        <relationship name="meal" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Meal" inverseName="recipe" inverseEntity="Meal"/>
+        <relationship name="mealPlan" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MealPlan" inverseName="recipes" inverseEntity="MealPlan"/>
     </entity>
 </model>
