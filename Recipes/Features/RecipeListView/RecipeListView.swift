@@ -15,6 +15,7 @@ struct RecipeListView: View {
     @State private var recipeSearchStr: String = ""
     @FocusState private var recipeSearchStrIsFocused: Bool
     @ObservedObject private var viewModel: RecipeListViewModel
+    @State private var presentImporter = false
 
     init(viewModel: RecipeListViewModel) {
         self.viewModel = viewModel
@@ -114,7 +115,44 @@ struct RecipeListView: View {
             }
             .navigationTitle("Recipes")
             .background(Colours.backgroundPrimary)
+            .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button("Import") {
+                        presentImporter = true
+                    }.fileImporter(isPresented: $presentImporter, allowedContentTypes: [.json]) { result in
+                        switch result {
+                        case .success(let url):
+                            viewModel.importRecipes(from: url)
+                        case .failure(let error):
+                            print(error)
+                        }
+                    }
+                }
+                ToolbarItem {
+                    Button("Export") {
+                        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+                           let rootViewController = windowScene.windows.first(where: { $0.isKeyWindow })?.rootViewController,
+                           let file = viewModel.recipesAsJSON() {
+                            let av = UIActivityViewController(activityItems: [file], applicationActivities: nil)
+                            rootViewController.present(av, animated: true, completion: nil)
+                        }
+                    }
+                }
+            }
         }
         .font(.brand)
+    }
+}
+
+
+struct Previews_RecipeListView_Previews: PreviewProvider {
+    static let controller = PersistenceController(inMemory: true)
+
+    static var context: NSManagedObjectContext {
+        controller.container.viewContext
+    }
+
+    static var previews: some View {
+        RecipeListView(viewModel: .init(viewContext: context))
     }
 }
